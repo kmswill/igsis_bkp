@@ -2652,13 +2652,13 @@ $mensagem = "Foram encontradas ".$resultado['numReg']." eventos com o termo ".$_
 	</section> <!--/#list_items-->
 <?php break; ?>
 <?php
-case "pedidos":
+case "pedidos_enviados":
 require "../funcoes/funcoesSiscontrat.php";
 $_SESSION['idPedido'] = ""; //zera a session pedido
 
 // não precisa chamar a funcao porque o index contrato já chama.
 
-$linha_tabela_lista = siscontratListaEvento("todos",$_SESSION['idInstituicao'],20,1,"DESC","todos",$_SESSION['idUsuario']); //esse gera uma array com os pedidos
+$lista_pedido = siscontratListaEvento("todos",$_SESSION['idInstituicao'],50,1,"DESC","todos",$_SESSION['idUsuario']); //esse gera uma array com os pedidos
 $url = urlAtual();
 $link = "http://".$_SERVER['HTTP_HOST']."/igsis/pdf/pedido_pdf.php";
 //$link="frm_edita_pedidocontratacaopj.php";
@@ -2671,37 +2671,40 @@ $link = "http://".$_SERVER['HTTP_HOST']."/igsis/pdf/pedido_pdf.php";
 				  <div class="col-md-offset-2 col-md-8">
 					<div class="section-heading">
 					 <h2>Pedidos enviados</h2>
-					<h4>Selecione o evento para carregar.</h4>
-                    <h5><?php if(isset($mensagem)){echo $mensagem;} ?></h5>
 					</div>
 				  </div>
 			  </div>  
 			
 			<div class="table-responsive list_info">
-				<table class="table table-condensed"><script type=text/javascript language=JavaScript src=../js/find2.js> </script>
+				<table class="table table-condensed"></script>
 					<thead>
 						<tr class="list_menu">
 							<td>Codigo do Pedido</td>
 							<td>Proponente</td>
 							<td>Objeto</td>
+							<td>Local</td>
 							<td>Valor(em Reais)</td>
 							<td>Periodo</td>
 							<td>Status</td>
+							<td>Contratos</td>
 						</tr>
 					</thead>
 					<tbody>
 <?php
 $data=date('Y');
-for($i = 0; $i < count($linha_tabela_lista); $i++)
- {
-	$linha_tabela_pedido_contratacaopf = siscontratDocs($linha_tabela_lista[$i]['IdProponente'],$linha_tabela_lista[$i]['TipoPessoa']);	
-	$protocolo = recuperaDados("sis_protocolo",$linha_tabela_lista[$i]['idPedido'],"idPedido"); 
-	echo "<tr><td class='lista'> <a href='".$link."?id=".$linha_tabela_lista[$i]['idPedido']."&tipo=".$linha_tabela_lista[$i]['TipoPessoa']."' target='_blank'>".$linha_tabela_lista[$i]['idPedido']."</a></td>";
-	echo '<td class="list_description">'.$linha_tabela_pedido_contratacaopf['Nome'].					'</td> ';
-	echo '<td class="list_description">'.$linha_tabela_lista[$i]['Objeto'].						'</td> ';
-	echo '<td class="list_description">'.dinheiroParaBr($linha_tabela_lista[$i]['ValorGlobal']).				'</td> ';
-	echo '<td class="list_description">'.$linha_tabela_lista[$i]['Periodo'].						'</td> ';
-	echo '<td class="list_description">'.$linha_tabela_lista[$i]['Status'].						'</td> </tr>';
+for($i = 0; $i < count($lista_pedido); $i++)
+ {	
+	$operador = recuperaDados("ig_usuario",$lista_pedido[$i]['Contratos'],"idUsuario");
+	$status = recuperaDados("sis_estado",$lista_pedido[$i]['Status'],"idEstado");
+	$lista_pf = siscontratDocs($lista_pedido[$i]['IdProponente'],$lista_pedido[$i]['TipoPessoa']);	
+	echo '<tr><td class="list_description">'.$lista_pedido[$i]['idPedido'].'</a></td>';
+	echo '<td class="list_description">'.$lista_pf['Nome'].'</td> ';
+	echo '<td class="list_description">'.$lista_pedido[$i]['Objeto'].'</td> ';
+	echo '<td class="list_description">'.$lista_pedido[$i]['Local'].'</td> ';
+	echo '<td class="list_description">'.dinheiroParaBr($lista_pedido[$i]['ValorGlobal']).'</td> ';
+	echo '<td class="list_description">'.$lista_pedido[$i]['Periodo'].'</td> ';
+	echo '<td class="list_description">'.$status['estado'].'</td>';
+	echo '<td class="list_description">'.$operador['nomeCompleto'].'</td> </tr>';
 	}
 
 ?>
