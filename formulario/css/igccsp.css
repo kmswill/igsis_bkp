@@ -1,0 +1,298 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 20px;
+	padding: 0; 
+	font-family: Verdana; 
+	font-size: 14px;
+	}
+			
+/* Estilo utilizado no exemplo */
+			
+div#caixa {
+	display: inline-block; 
+	width: 800px; /* height: 1050px; */
+	}
+	
+div#caixa p#abas {
+	display: inline-block; 
+	width: 790px; 
+	height: 40px; 
+	margin: 0 10px 0 10px; 
+	padding: 0; 
+	overflow: hidden; 
+	vertical-align: bottom;
+	}
+	
+div#caixa p#abas a {
+	display: inline-block; 
+	font-size: 16px; 
+	font-weight: bold; 
+	color: #666; 
+	text-decoration: none; 
+	padding: 12px 26px 12px 26px; 
+	margin: 0 5px 0 0; 
+	background-color: #f0f0f0 ;
+	}
+	
+div#caixa p#abas a:hover {
+	background-color: #999; 
+	color: white;
+	}
+	
+div#caixa p#abas a.selected {
+	background-color: #F00 ; 
+	color: #FFF;
+	}
+	
+div#caixa ul#conteudos {
+	display: inline-block; 
+	width: 790px; 
+	/* height: 1050px; */ 
+	margin: 0; 
+	padding: 0; 
+	border: 1px solid #ccc;
+	}
+	
+div#caixa ul#conteudos li {
+	display: inline-block; 
+	width: 770px; 
+	/* height: 1040px; */
+	margin: 10px 20px 10px 20px; 
+	padding: 0; 
+	overflow: auto;
+	}
+
+ div#contratado {
+    display: none;
+    width: 300px;
+    /*height: 100px;*/
+    background:#EDEDED ;
+ 	padding: 12px 26px 12px 26px; 
+	margin: 0 5px 0 0; 
+  }
+  div#finalizar {
+    display: none;
+    width: 500px;
+    /*height: 100px;*/
+    background:#EDEDED ;
+ 	padding: 12px 26px 12px 26px; 
+	margin: 0 5px 0 0; 
+
+  } 	
+
+  div#inserirnovo {
+    display: none;
+    width: 500px;
+    /*height: 100px;*/
+    background:#EDEDED ;
+ 	padding: 12px 26px 12px 26px; 
+	margin: 0 5px 0 0; 
+
+  } 	
+      div#pop-up #pop-up2 {
+        display: none;
+        position: absolute;
+        width: 280px;
+        padding: 10px;
+        background: #eeeeee;
+        color: #000000;
+        border: 1px solid #1a1a1a;
+        font-size: 90%;
+      }
+	  
+body {
+	margin:0;
+	padding:0;
+	text-align:center; /* hack para o IE */
+}
+
+div.center {
+	width: 800px;
+	margin:0 auto;         
+	text-align:left; /* "remédio" para o hack do IE */ 
+}
+
+div#logo{
+	text-align:center;
+	}
+
+div#menu{
+	text-align:center;
+	}
+	
+#menu ul {
+	height:40px;
+	padding:0px;
+	margin:0px;
+	list-style:none;
+}
+
+#menu ul li { 
+	height:30px;
+	display: inline; 
+}
+
+#menu ul li a {
+	padding: 10px 10px;
+	display: inline-block;
+ 	height:20px;
+	/* visual do link */
+	background-color:#EDEDED;
+	color: #333;
+	text-decoration: none;
+	border-bottom:3px solid #EDEDED;
+}
+
+#menu ul li a:hover {
+	background-color:#D6D6D6;
+	color: #6D6D6D;
+	border-bottom:3px solid #EA0000;
+}
+
+#mensagem_upload{
+	position:relative;
+	float:right;
+	
+	}
+	
+#rodape{
+	margin: 10px 0 0 0;
+	text-align: center;
+	
+	}
+	
+	#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#apresentacao{
+	padding: 0 20px 0 20px;
+	}
+	
+#form_login{
+	width:48%;
+	}
+	
+#form_msg{
+	padding-top: 20px;
+	width:50%;
+	position: relative;
+	float:right;
+	}		
+  
+input#gobutton{
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+padding:5px 25px; /*add some padding to the inside of the button*/
+background:#F00; /*the colour of the button*/
+border:1px solid ; /*required or the default border for the browser will appear*/
+/*give the button curved corners, alter the size as required*/
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+/*give the button a drop shadow*/
+-webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+-moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+box-shadow: 0 0 4px rgba(0,0,0, .75);
+/*style the text*/
+color:#FFF;
+font-size:1.1em;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#gobutton:hover, input#gobutton:focus{
+background-color :#900; /*make the background a little darker*/
+/*reduce the drop shadow size to give a pushed button effect*/
+-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+box-shadow: 0 0 1px rgba(0,0,0, .75);
+}
+
+input.gobutton{
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+padding:5px 25px; /*add some padding to the inside of the button*/
+background:#F00; /*the colour of the button*/
+border:1px solid ; /*required or the default border for the browser will appear*/
+/*give the button curved corners, alter the size as required*/
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+/*give the button a drop shadow*/
+-webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+-moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+box-shadow: 0 0 4px rgba(0,0,0, .75);
+/*style the text*/
+color:#FFF;
+font-size:1.1em;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input.gobutton:hover, input#gobutton:focus{
+background-color :#900; /*make the background a little darker*/
+/*reduce the drop shadow size to give a pushed button effect*/
+-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+box-shadow: 0 0 1px rgba(0,0,0, .75);
+}
+
+div.normal {
+	border: 1px solid #CCC;
+	padding: 20px 20px 20px 20px;
+
+	}
+
+div.resumo01 {
+	background:#EDEDED;
+	padding: 10px 10px 10px 10px;
+
+}	
+
+div.resumo02 {
+	background:#FFF;	
+	padding: 10px 10px 10px 10px;
+
+}
+
+table.validacao tr,td {
+	border: 1px solid #999;
+	}
+	
+	#main {
+  width:750px;
+  height: 750px; /*can be anything, just should make sure it is taller than the sidebar*/
+  padding: 25px;
+  float: left;
+  background-color: #fafafa;
+}
+#sidebar {
+  width: 120px;
+  background-color: #ccc;
+  min-height: 200px;
+  margin: 10px 0 15px 0; /*controls the cutoff of the top and bottom limitations*/
+  padding: 15px 10px;
+  float: left; /* float right for a right aligned sidebar */
+}
+#footer {
+  width: 940px;
+  clear:both;
+  background-color: #ccc;
+  height: 500px;
+  margin-top: 100px;
+}
+#wrapper {
+  width: 940px; /* MUST HAVE WIDTH SET, should be the sidebar width + main width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ultimas{
+	font-size:medium;
+	}
+
+label.error { float: none; color: red; margin: 0 .5em 0 0; vertical-align: top; font-size: 14px }	
