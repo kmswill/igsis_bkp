@@ -22,8 +22,8 @@ if(isset($_POST['finalizar'])){
 			if($query_protocolo){
 				gravarLog($sql_protocolo);
 				$protocolo = recuperaUltimo("ig_protocolo");
-				$mensagem = "O formulário de evento foi enviado com sucesso. O número IG é .".$idEvento." . <br />
-				Refira-se a este número ao entrar em contato com as áreas de Comunicação e Produção.
+				$mensagem = "O formulário de evento foi enviado com sucesso!<br/><h5>O número IG é ".$idEvento."</h5>
+				Refira-se a este número ao entrar em contato com as áreas de Comunicação e Produção.<br /><br /><br />
 				";
 				$sql_recupera_pedidos = "SELECT * FROM igsis_pedido_contratacao WHERE idEvento = '$idEvento' AND publicado = '1'";
 				$query_recupera_pedidos = mysqli_query($con,$sql_recupera_pedidos);
@@ -84,9 +84,9 @@ if(isset($_POST['finalizar'])){
 								gravarLog($sql_fecha_pedido);
 								$protoPedido = recuperaUltimo("sis_protocolo");
 								$pedidos[$i] = $idPedido;
-								$mensagem = $mensagem."Foi gerado um pedido de contratação com número ".$pedidos[$i].".<br />
+								$mensagem = $mensagem."Foi gerado um <strong>pedido de contratação</strong> com número <h5>".$pedidos[$i]."</h5>
 								Este número é a referência para as áreas de Contratos, Jurídico, Finanças, Contabilidade entre outros.<br /><br />
-								<a href='http://www.centrocultural.cc/igsis/manual/index.php/2016/01/24/numero-ig-e-numero-pedido-de-contratacao/' target='_blank'>Saiba mais sobre os números gerados no nosso <i>Manual do Sistema</i></a>.
+								<a href='http://www.centrocultural.cc/igsis/manual/index.php/2016/01/24/numero-ig-e-numero-pedido-de-contratacao/' target='_blank'>Saiba mais sobre os números gerados no nosso <i>Manual do Sistema</i></a>.<br /><br /><br />
 								";
 								$i++;
 							

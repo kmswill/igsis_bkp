@@ -2511,7 +2511,7 @@ if($verifica == 0){
 			if($data1 > $data2 AND $data1 < $data3){
 				if($num_botao > 0){
 					?>
-					1
+		<font color="#FFF">1</font>
           <form method='POST' action='?perfil=finalizar'>
 			<input type='hidden' name='finalizar' value='<?php echo $campo['idEvento'] ?>' />
 			<input type ='submit' class='btn btn-theme btn-lg btn-block' value='Enviar' onclick="this.disabled = true; this.value = 'Enviando…'; this.form.submit();"></form>
@@ -2519,7 +2519,7 @@ if($verifica == 0){
 			<p>O sistema está fechado para envios até 15/06/2016</p>	
 			<?php } ?>
 			<?php }else{ ?>
-				2
+		<font color="#FFF">2</font>
           <form method='POST' action='?perfil=finalizar'>
 			<input type='hidden' name='finalizar' value='<?php echo $campo['idEvento'] ?>' />
 			<input type ='submit' class='btn btn-theme btn-lg btn-block' value='Enviar' onclick="this.disabled = true; this.value = 'Enviando…'; this.form.submit();"></form>
