@@ -17,12 +17,14 @@ case 'inicio':
 <section id="contact" class="home-section bg-white">
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
+        <!--    
+			<div class="col-md-offset-2 col-md-8">
                 <div class="text-hide">
 	                <h4>Escolha uma opção</h4>
                 </div>
             </div>
-        <div class="form-group">
+        
+		<div class="form-group">
             <div class="col-md-offset-2 col-md-8">
 	            <a href="?perfil=evento&p=basica&inserir=novo" class="btn btn-theme btn-lg btn-block">Inserir um novo evento</a>
 	            <a href="?perfil=evento&p=carregar" class="btn btn-theme btn-lg btn-block">Carregar um evento gravado</a>
@@ -31,7 +33,31 @@ case 'inicio':
    	            <a href="?perfil=propostas" class="btn btn-theme btn-lg btn-block">Pesquisar propostas enviadas por formulário online</a>      
   	            <a href="http://www.centrocultural.cc/smcproducao/" target = "_blank" class="btn btn-theme btn-lg btn-block">Informações de produção / riders / mapas de luz</a>            
             </div>
-          </div>
+        </div>
+		  -->
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-8">
+				<h5>Seus últimos eventos inseridos</h5>
+                <div class="left">
+					<ul>
+					<?php 
+					$con = bancoMysqli();
+					$sql_ultimo = "SELECT * FROM ig_evento WHERE dataEnvio IS NOT NULL AND idUsuario = ".$_SESSION['idUsuario']." OR idResponsavel = ".$_SESSION['idUsuario']." OR suplente = ".$_SESSION['idUsuario']." ORDER BY dataEnvio DESC LIMIT 0,30";
+					$query_ultimo = mysqli_query($con,$sql_ultimo);
+					while($evento = mysqli_fetch_array($query_ultimo)){
+						$usuario = recuperaUsuario($evento['idUsuario']);
+						$instituicao = recuperaDados("ig_instituicao",$usuario['idInstituicao'],"idInstituicao");				
+					?>
+					<li><p><strong><?php echo $evento['nomeEvento'] ?> </strong>(<?php echo retornaTipo($evento['ig_tipo_evento_idTipoEvento']) ?>) </p>
+                    <p><i><?php echo $evento['autor'] ?></i> - enviado por: <?php echo $usuario['nomeCompleto'] ?> (<?php echo $instituicao['instituicao'] ?>) em: <?php echo exibirDataBr($evento['dataEnvio']) ?></p>
+                    <p><?php echo resumoOcorrencias($evento['idEvento']); ?></p>
+					<br />				
+                    </li>
+					<?php } ?>
+                    </ul> 
+                </div>
+			</div>
+		</div>
         </div>
     </div>
 </section>    
