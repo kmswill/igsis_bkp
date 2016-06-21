@@ -10,6 +10,7 @@ $pasta = "?perfil=pagamento&p=";
 	<ul class="dl-menu">
 		<li><a href="<?php echo $pasta ?>frm_busca_nepagamento">Buscar</a></li>
 		<li><a href="<?php echo $pasta ?>frm_busca_periodo">Buscar por período</a></li>
+		<li><a href="<?php echo $pasta ?>frm_busca_parcela">Buscar por data da parcela</a></li>
 		<li><a href="<?php echo $pasta ?>frm_listapedidocontratacaopf_cadastrane_vocacional">N.E. Formação</a></li>
 		<li><a href="<?php echo $pasta ?>frm_concluir_processo">Concluir Processos IGSIS</a></li>
 		<li style="color:white;">-------------------------</li>		
