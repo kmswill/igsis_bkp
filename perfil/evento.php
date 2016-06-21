@@ -1003,12 +1003,15 @@ case 9:
 	if(isset($_POST['atualizar'])){ //Atualizar 02		
 		$ig_teatro_danca_estreia = $_POST['ig_teatro_danca_estreia'];
 		$ig_teatro_danca_genero = $_POST['ig_teatro_danca_genero'];
+	    $ig_teatro_danca_venda = $_POST['ig_teatro_danca_venda'];
+		$ig_teatro_danca_material = $_POST['ig_teatro_danca_material'];
+
 		
 		//verifica se existe um registro na tabela
 		$ver = verificaExiste($idTabela,$idCampo,$idDado,$st);
 		
 			if($ver['numero'] == 0){ // insere um registro novo 03
-				$sql_insere_teatro = "INSERT INTO  `ig_teatro_danca` (`idTeatro` ,`ig_evento_idEvento` ,`estreia` ,`genero`)VALUES (NULL ,  '$idDado',  '$ig_teatro_danca_estreia',  '$ig_teatro_danca_genero');";
+				$sql_insere_teatro = "INSERT INTO  `ig_teatro_danca` (`idTeatro` ,`ig_evento_idEvento` ,`estreia` ,`genero`, `venda`, `material`)VALUES (NULL ,  '$idDado',  '$ig_teatro_danca_estreia',  '$ig_teatro_danca_genero', '$ig_teatro_danca_venda', '$ig_teatro_danca_material' );";
 				if(mysqli_query($con,$sql_insere_teatro)){ //04		
 					$mensagem = "Atualizado com sucesso! ";	
 					gravarLog($sql_insere_teatro); //grava log
@@ -1016,9 +1019,9 @@ case 9:
 					$mensagem = "Erro ao atualizar!";
 				} //04
 			}else{ //atualiza o registro existente 03
-				$sql_atualiza_teatro = "UPDATE ig_teatro_danca SET estreia = '$ig_teatro_danca_estreia', genero = '$ig_teatro_danca_genero' WHERE ig_evento_idEvento = $idDado";
+				$sql_atualiza_teatro = "UPDATE ig_teatro_danca SET estreia = '$ig_teatro_danca_estreia', genero = '$ig_teatro_danca_genero', '$ig_teatro_danca_venda', '$ig_teatro_danca_material' WHERE ig_evento_idEvento = $idDado";
 				if(mysqli_query($con,$sql_atualiza_teatro)){	//05	
-					$mensagem = "Atualizado com sucesso! ";	
+					$mensagem = "Atualizado com sucesso!";	
 					gravarLog($sql_atualiza_teatro); //grava log
 				}else{ //05
 					$mensagem = "Erro ao atualizar!";
@@ -1043,6 +1046,21 @@ $artes = recuperaDados($idTabela,$_SESSION['idEvento'],$idCampo);
                     	<input type="text" class="form-control" name="ig_teatro_danca_genero" value="<?php if(isset($artes)){echo $artes['genero'];} ?>" id="" placeholder="">
 
                 	</div>
+					<div class=" col-md-2">
+                    	<label>Venda de material</label>
+                		 <select class="form-control" name="ig_teatro_danca_venda" id="inputSubject" >
+                        <option value="1" <?php if(isset($artes)){if($artes['venda'] == "1"){echo "selected";}} ?> >Sim</option>
+                        <option value="0" <?php if(isset($artes)){if($artes['venda'] == "0"){echo "selected";}} ?>>Não</option>
+                        </select>
+                	</div>
+
+                </div>
+      		 <div class="form-group">
+            	<div class="col-md-offset-2 col-md-8">
+            		<label>Descrição do material</label>
+            		<textarea name="ig_teatro_danca_material" id="inputSubject" class="form-control" rows="10" placeholder="Livro, camiseta, CD, DVD, etc"><?php echo $artes["material"] ?></textarea>
+            	</div> 
+            </div>
                 </div>
                             <div class="form-group">
 	            <div class="col-md-offset-2 col-md-8">
@@ -1050,7 +1068,6 @@ $artes = recuperaDados($idTabela,$_SESSION['idEvento'],$idCampo);
     		        <input type="submit" class="btn btn-theme btn-lg btn-block" value="Gravar">
             	</div>
             </div>
-            </form>
         </div>
     </div>
 </section>
