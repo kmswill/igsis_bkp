@@ -1094,7 +1094,7 @@ if(isset($_POST['insereExecutante'])){ //insere IdExecutante
 	WHERE `idPedidoContratacao` = '$idPedido';";
 	$query_atualiza_executante = mysqli_query($con,$sql_atualiza_executante);	
 	if($query_atualiza_executante){
-		$mensagem = "Executante inserido com sucesso!";	
+		$mensagem = "Líder do Grupo inserido com sucesso!";	
 	}
 }
 
@@ -1196,7 +1196,7 @@ $executante = siscontratDocs($pedido['IdExecutante'],1);
                 </div> 
 
                   <div class="form-group"> 
-					<div class="col-md-offset-2 col-md-8"><strong>Executante:</strong><br/>
+					<div class="col-md-offset-2 col-md-8"><strong>Líder do Grupo:</strong><br/>
 		  <form class="form-horizontal" role="form" action="?perfil=contratados&p=edicaoExecutante&id_pf=<?php echo $pedido['IdExecutante']?>"  method="post">
 					  <input type='text' readonly class='form-control' name='Executante' id='Executante' value="<?php echo $executante['Nome'] ?>">                    	
                     </div>
@@ -1206,9 +1206,9 @@ $executante = siscontratDocs($pedido['IdExecutante'],1);
 
                       <input type="hidden" name="idPedido" value="<?php echo $_SESSION['idPedido']; ?>" />
                      <?php if($pedido['IdExecutante'] == NULL OR $pedido['IdExecutante'] == ""){ ?>
-					 <input type="submit" class="btn btn-theme btn-med btn-block" value="Inserir executante">
+					 <input type="submit" class="btn btn-theme btn-med btn-block" value="Inserir Líder do Grupo">
                      <?php }else{ ?>
-					 <input type="submit" class="btn btn-theme btn-med btn-block" value="Abrir executante">
+					 <input type="submit" class="btn btn-theme btn-med btn-block" value="Abrir Líder do Grupo">
                      <?php } ?>
                      </form>
 					</div>
@@ -1425,7 +1425,7 @@ case "busca":
 			  <div class="row">
 				  <div class="col-md-offset-2 col-md-8">
 					<div class="section-heading">
-					 <h2>Executante - Pessoa Física</h2>
+					 <h2>Líder do Grupo - Pessoa Física</h2>
                     <p>Você está inserindo pessoas físicas para serem contratadas para o evento <strong><?php  //echo $nomeEvento['nomeEvento']; ?></strong></p>
 
 <p></p>
@@ -2373,7 +2373,7 @@ if(isset($_POST['atualizar'])){
 					  <input type='text'  name="valor<?php echo $i; ?>" id='valor' class='form-control valor' value="<?php echo dinheiroParaBr($parcela['valor']); ?>">
 					</div>
                     
-                    <div class="col-xs-6 col-sm-3"><strong>Data:</strong><br/>
+                    <div class="col-xs-6 col-sm-3"><strong>Data do Kit de Pagamento:</strong><br/>
 					  <input type='text' name="data<?php echo $i; ?>" id='' class='form-control datepicker' value="<?php 
 					  if($parcela['vencimento'] == '0000-00-00 00:00:00' OR $parcela['vencimento'] == NULL){ 
 					  echo date('d/m/Y');

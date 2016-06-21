@@ -20,7 +20,7 @@ if(isset($_POST['insereExecutante'])){ //insere IdExecutante
 	WHERE `idPedidoContratacao` = '$idPedido';";
 	$query_atualiza_executante = mysqli_query($con,$sql_atualiza_executante);	
 	if($query_atualiza_executante){
-		$mensagem = "Executante inserido com sucesso!";	
+		$mensagem = "Líder do Grupo inserido com sucesso!";	
 	}
 }
 
@@ -338,7 +338,7 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
                 </div> 
 
                   <div class="form-group"> 
-					<div class="col-md-offset-2 col-md-8"><strong>Executante:</strong><br/>
+					<div class="col-md-offset-2 col-md-8"><strong>Líder do Grupo:</strong><br/>
 		  <form class="form-horizontal" role="form" action="?perfil=contratos&p=frm_edita_executante&id_pf=<?php echo $pedido['IdExecutante']?>"  method="post">
 					  <input type='text' readonly class='form-control' name='Executante' id='Executante' value="<?php echo $executante['Nome'] ?>">                    	
                     </div>
