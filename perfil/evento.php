@@ -600,8 +600,26 @@ $producao = recuperaDados("ig_producao",$campo['idEvento'],"ig_evento_idEvento")
                 </div>
             </div>
     </div>
-    
-    <div class="row">
+ 
+<script type="text/javascript">
+  /* Máscaras ER */
+function mascara(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("execmascara()",1)
+}
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value)
+}
+function mtel(v){
+    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+}
+ </script>
+ 
+   <div class="row">
         <div class="col-md-offset-1 col-md-10">
         <form method="POST" action="?perfil=evento&p=internos" class="form-horizontal" role="form">
        		 <div class="form-group">
@@ -613,7 +631,7 @@ $producao = recuperaDados("ig_producao",$campo['idEvento'],"ig_evento_idEvento")
        		 <div class="form-group">
             	<div class="col-md-offset-2 col-md-8">
             		<label>Telefones</label>
-            		<input type="text" name="ig_produtor_telefone" class="form-control" id="inputSubject" value="<?php echo $produtor['telefone'] ?>"/>
+            		<input type="text" name="ig_produtor_telefone" class="form-control.processo" id="telefone" onkeyup="mascara( this, mtel );"  value="<?php echo $produtor['telefone'] ?>"/>
             	</div> 
             </div>       		 <div class="form-group">
             	<div class="col-md-offset-2 col-md-8">
