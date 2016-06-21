@@ -1051,7 +1051,7 @@ case 9:
 					$mensagem = "Erro ao atualizar!";
 				} //04
 			}else{ //atualiza o registro existente 03
-				$sql_atualiza_teatro = "UPDATE ig_teatro_danca SET estreia = '$ig_teatro_danca_estreia', genero = '$ig_teatro_danca_genero', '$ig_teatro_danca_venda', '$ig_teatro_danca_material' WHERE ig_evento_idEvento = $idDado";
+				$sql_atualiza_teatro = "UPDATE ig_teatro_danca SET estreia = '$ig_teatro_danca_estreia', genero = '$ig_teatro_danca_genero', venda = '$ig_teatro_danca_venda', material = '$ig_teatro_danca_material' WHERE ig_evento_idEvento = $idDado";
 				if(mysqli_query($con,$sql_atualiza_teatro)){	//05	
 					$mensagem = "Atualizado com sucesso!";	
 					gravarLog($sql_atualiza_teatro); //grava log
