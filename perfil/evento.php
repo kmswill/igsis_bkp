@@ -473,6 +473,7 @@ if(isset($_POST['atualizar'])){
 	//gera as variáveis
 	$ig_produtor_nome = $_POST['ig_produtor_nome'];
 	$ig_produtor_telefone = $_POST['ig_produtor_telefone'];
+	$ig_produtor_telefone2 = $_POST['ig_produtor_telefone2'];
 	$ig_produtor_email = $_POST['ig_produtor_email'];
 	$ig_producao_equipe = addslashes($_POST['ig_producao_equipe']);		
 	$ig_producao_infraestrutura = addslashes($_POST['ig_producao_infraestrutura']);
@@ -500,8 +501,8 @@ if(isset($_POST['atualizar'])){
 	$ver = recuperaEvento($_SESSION['idEvento']);
 	if($ver['ig_produtor_idProdutor'] == 0){
 	
-		$sql_inserir_produtor = "INSERT INTO  `ig_produtor` (`idProdutor` ,`nome` ,`email` ,`telefone` ,`idSpCultura`
-) VALUES ( NULL ,  '$ig_produtor_nome',  '$ig_produtor_email',  '$ig_produtor_telefone',  '' )";
+		$sql_inserir_produtor = "INSERT INTO  `ig_produtor` (`idProdutor` ,`nome` ,`email` ,`telefone` ,`telefone2` ,`idSpCultura`
+) VALUES ( NULL ,  '$ig_produtor_nome',  '$ig_produtor_email',  '$ig_produtor_telefone',  '$ig_produtor_telefone2',  '' )";
 		if(mysqli_query($con,$sql_inserir_produtor)){		
 			$mensagem = "Produtor inserido com sucesso! ";	
 			$idProdutor = recuperaUltimo("ig_produtor"); //recupera o idProdutor inserido
@@ -511,7 +512,7 @@ if(isset($_POST['atualizar'])){
 			$mensagem = "Erro ao atualizar!";
 		}
 	}else{
-		$sql_atualizar_produtor = "UPDATE ig_produtor SET `nome` = '$ig_produtor_nome' ,`email` = '$ig_produtor_email' ,`telefone` = '$ig_produtor_telefone' WHERE idProdutor = ".$ver['ig_produtor_idProdutor'];
+		$sql_atualizar_produtor = "UPDATE ig_produtor SET `nome` = '$ig_produtor_nome' ,`email` = '$ig_produtor_email' ,`telefone` = '$ig_produtor_telefone',`telefone2` = '$ig_produtor_telefone2' WHERE idProdutor = ".$ver['ig_produtor_idProdutor'];
 		if(mysqli_query($con,$sql_atualizar_produtor)){		
 			$mensagem = "Produtor inserido com sucesso! ";	
 			gravarLog($sql_atualizar_produtor); //grava log
@@ -601,24 +602,6 @@ $producao = recuperaDados("ig_producao",$campo['idEvento'],"ig_evento_idEvento")
             </div>
     </div>
  
-<script type="text/javascript">
-  /* Máscaras ER */
-function mascara(o,f){
-    v_obj=o
-    v_fun=f
-    setTimeout("execmascara()",1)
-}
-function execmascara(){
-    v_obj.value=v_fun(v_obj.value)
-}
-function mtel(v){
-    v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
-    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
-    return v;
-}
- </script>
- 
    <div class="row">
         <div class="col-md-offset-1 col-md-10">
         <form method="POST" action="?perfil=evento&p=internos" class="form-horizontal" role="form">
@@ -629,11 +612,16 @@ function mtel(v){
             	</div> 
             </div>
        		 <div class="form-group">
-            	<div class="col-md-offset-2 col-md-8">
-            		<label>Telefones</label>
-            		<input type="text" name="ig_produtor_telefone" class="form-control.processo" id="telefone" onkeyup="mascara( this, mtel );"  value="<?php echo $produtor['telefone'] ?>"/>
-            	</div> 
-            </div>       		 <div class="form-group">
+            	<div class="col-md-offset-2 col-md-6">
+            		<label>Telefone #1: </label>
+            		<input type="text" name="ig_produtor_telefone" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" value="<?php echo $produtor['telefone'] ?>"/>
+            	</div>
+				<div class="col-md-6">
+            		<label>Telefone #2: </label>
+            		<input type="text" name="ig_produtor_telefone2" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" value="<?php echo $produtor['telefone2'] ?>"/>
+            	</div> 				
+            </div>       		 
+			<div class="form-group">
             	<div class="col-md-offset-2 col-md-8">
             		<label>Email</label>
             		<input type="text" name="ig_produtor_email" class="form-control" id="inputSubject" value="<?php echo $produtor['email'] ?>"/>
