@@ -1763,7 +1763,7 @@ $fisica = recuperaDados("sis_pessoa_fisica",$ultimo,"Id_PessoaFisica");
 	<section id="contact" class="home-section bg-white">
 	  	<div class="container">
 			  <div class="form-group">
-					<h3>CADASTRO DE EXECUTANTE (PESSOA FÍSICA)</h3>
+					<h3>CADASTRO DE LÍDER DO GRUPO (PESSOA FÍSICA)</h3>
                     <h5><?php if(isset($mensagem)){echo $mensagem;} ?></h5>
                 </div>
 
@@ -1942,7 +1942,7 @@ $fisica = recuperaDados("sis_pessoa_fisica",$ultimo,"Id_PessoaFisica");
                           
                 <div class="form-group">
 					<div class="col-md-offset-2 col-md-8">
-						<a href="?perfil=contratados&p=edicaoExecutante&id_pf="><input type="submit" value="Mudar o executante" class="btn btn-theme btn-block"></a>
+						<a href="?perfil=contratados&p=edicaoExecutante&id_pf="><input type="submit" value="Mudar o líder do grupo" class="btn btn-theme btn-block"></a>
 					</div>
 				</div>
             <?php } ?>
