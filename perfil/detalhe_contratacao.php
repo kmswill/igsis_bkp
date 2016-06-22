@@ -16,8 +16,7 @@ require "../funcoes/funcoesSiscontrat.php";
 
 					</div>
 				  </div>
-			  </div>
-			  
+			  </div>			  
 	        <div class="row">
 			<div class="table-responsive list_info" >
             <h4><?php echo $evento['nomeEvento'] ?></h4>
