@@ -23,6 +23,9 @@ $evento = recuperaDados('ig_evento',$idEvento,'idEvento');
 		<div class="row">
 	  	<div class="col-md-offset-1 col-md-10">            
             <div class="left">
+				<?php if($pedido['TipoPessoa'] == '4'){ ?>
+					<h3>CONTRATAÇÃO DA SMC-DIVISÃO DE FORMAÇÃO</h3>
+				<?php }else{ ?>
 				<p align="justify"><?php descricaoEvento($idEvento); ?></p>
 				<br/>
 				<h5>Ocorrências</h5>
@@ -32,8 +35,12 @@ $evento = recuperaDados('ig_evento',$idEvento,'idEvento');
 				<h5>Especificidades</h5>
 				<p align="justify"><?php descricaoEspecificidades($idEvento,$evento['ig_tipo_evento_idTipoEvento']); ?></p>
 				<br/>
-				<h5>Sub-eventos</h5>				
-				<p align="justify"><?php listaSubEventosCom($idEvento); ?></p>
+				<h5>Sub-eventos</h5>
+				<?php if($evento['subEvento'] == '1'){ ?>
+					<p align="justify"><?php listaSubEventosCom($idEvento); ?></p>
+				<?php }else{ ?>
+					<p>Não há sub-eventos cadastrados.</p>
+				<?php } ?>
 				<?php if($evento['ig_tipo_evento_idTipoEvento'] == '1'){ ?>
 					<br />
 					<h5>Grade de Filmes</h5>
@@ -45,20 +52,24 @@ $evento = recuperaDados('ig_evento',$idEvento,'idEvento');
 				<br />
 				<h5>Serviços Internos</h5>
 				<p align="justify"><?php listaServicosInternos($idEvento) ?></p>
+				<?php } ?>
 				<br />				
 				<h5>Pedidos de contratação</h5>
 				<?php if($pedido != NULL){ ?>
 					<p align="justify"><strong>Código do pedido de contratação:</strong> <?php echo $ano."-".$id_ped; ?></p>
 					<p align="justify"><strong>Número do Processo:</strong> <?php echo $pedido['NumeroProcesso'];?></p>
-					<p align="justify"><strong>Setor:</strong> <?php echo $pedido['Setor'];?></p>	
+					<p align="justify"><strong>Setor:</strong> <?php echo $pedido['Setor'];?></p>
+					<p align="justify"><strong>Tipo de pessoa:</strong> <?php echo retornaTipoPessoa($pedido['TipoPessoa']);?></p>
 					<p align="justify"><strong>Proponente:</strong> <?php echo $pessoa['Nome'];?></p>
 					<p align="justify"><strong>Objeto:</strong> <?php echo $pedido['Objeto'];?></p>
 					<p align="justify"><strong>Local:</strong> <?php echo $pedido['Local'];?></p>
+					<?php if($pedido['TipoPessoa'] == '4'){ ?>
+						<p align="justify"><strong>Carga Horária:</strong> <?php echo $pedido['CargaHoraria'];?></p>
+					<?php } ?>
 					<p align="justify"><strong>Verba:</strong> <?php echo retornaVerba($pedido['Verba']);?></p>
 					<p align="justify"><strong>Valor:</strong> R$ <?php echo dinheiroParaBr($pedido["ValorGlobal"]);?></p>
 					<p align="justify"><strong>Forma de Pagamento:</strong> <?php echo addslashes($pedido['FormaPagamento']);?></p>
 					<p align="justify"><strong>Data/Período:</strong> <?php echo $pedido['Periodo'];?></p>
-					<p align="justify"><strong>Carga Horária:</strong> <?php echo $pedido['CargaHoraria'];?></p>
 					<p align="justify"><strong>Justificativa:</strong> <?php echo $pedido['Justificativa']; ?></p>
 					<p align="justify"><strong>Parecer:</strong> <?php echo $pedido['ParecerTecnico'];?></p>
 					<p align="justify"><strong>Nota de Empenho:</strong> <?php echo $pedido['NotaEmpenho'];?></p>

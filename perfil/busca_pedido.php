@@ -291,12 +291,8 @@ $data=date('Y');
 for($h = 0; $h < $x['num']; $h++)
  {
 	 $status = recuperaDados("sis_estado",$x[$h]['status'],"idEstado");
-	if($x[$h]['tipo'] == 'Física'){
-		echo "<tr><td class='lista'> <a target='_blank' href='?perfil=busca_pedido_resultadopf&id_ped=".$x[$h]['id']."'>".$x[$h]['id']."</a></td>";
-	}else{
-		echo "<tr><td class='lista'> <a target='_blank' href='?perfil=busca_pedido_resultadopj&id_ped=".$x[$h]['id']."'>".$x[$h]['id']."</a></td>";
-		
-	}
+	
+	echo "<tr><td class='lista'> <a target='_blank' href='?perfil=detalhes_contrato&id_ped=".$x[$h]['id']."'>".$x[$h]['id']."</a></td>";
 	echo '<td class="list_description">'.$x[$h]['NumeroProcesso'].		'</td>';
 	echo '<td class="list_description">'.$x[$h]['proponente'].			'</td> ';
 	echo '<td class="list_description">'.$x[$h]['tipo'].				'</td> ';

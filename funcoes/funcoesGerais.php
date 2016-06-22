@@ -856,7 +856,7 @@ function listaOcorrenciasTexto($idEvento){ //lista ocorrencias de determinado ev
 			."<br />
 			Data: $data $semana <br />
 			Horário: $hora<br />
-			Duração: $duracao<br />
+			Duração: $duracao min<br />
 			Local: $espaco - $instituicao<br />
 			Retirada de ingresso: $retirada  - Valor: $valor <br /></br></div>";  
 			
@@ -1003,10 +1003,10 @@ function descricaoEvento($idEvento){ //imprime dados de um evento
 	echo "<b>Autor:</b><br />".$evento['autor']."<br /><br />";
 	echo "<b>Ficha técnica:</b><br />".nl2br($evento['fichaTecnica'])."<br /><br />";
 	echo "<b>Faixa ou indicação etária:</b> ".$faixa['faixa']."<br /><br />";
-	echo "<br /><br />";
+	//echo "<br /><br />";
 	echo "<b>Sinopse:</b><br />".nl2br($evento['sinopse'])."<br /><br />";
 	echo "<b>Release:</b><br />".nl2br($evento['releaseCom'])."<br /><br />";
-	echo "<b>Duração:</b> ".retornaDuracao($evento['idEvento'])." min.<br /><br />";
+	//echo "<b>Duração:</b> ".retornaDuracao($evento['idEvento'])." min.<br /><br />";
 	// Foi para área de pedido de contratação
 	//echo "<b>Justificativa:</b><br />".$evento['justificativa']."<br /><br />"; 
 	//echo "<b>Parecer artístico:</b><br />".$evento['parecerArtistico']."<br /><br />";
