@@ -85,7 +85,9 @@ if(isset($_POST['finalizar'])){
 								$protoPedido = recuperaUltimo("sis_protocolo");
 								$pedidos[$i] = $idPedido;
 								$mensagem = $mensagem."Foi gerado um <strong>pedido de contratação</strong> com número <h5>".$pedidos[$i]."</h5>
-								Este número é a referência para as áreas de Contratos, Jurídico, Finanças, Contabilidade entre outros.<br /><br />
+								Este número é a referência para as áreas de Contratos, Jurídico, Finanças, Contabilidade entre outros.<br />
+								<strong><a target='_blank' href='?perfil=detalhes_contrato&id_ped=".$pedidos[$i]."'>Clique aqui caso queira visualizar os detalhes desta contratação.</a></strong>
+								<br /><br />
 								<a href='http://www.centrocultural.cc/igsis/manual/index.php/2016/01/24/numero-ig-e-numero-pedido-de-contratacao/' target='_blank'>Saiba mais sobre os números gerados no nosso <i>Manual do Sistema</i></a>.<br /><br /><br />
 								";
 								$i++;
