@@ -425,7 +425,7 @@ function geraOpcao($tabela,$select,$instituicao){ //gera os options de um select
 	if($instituicao != ""){
 		$sql = "SELECT * FROM $tabela WHERE idInstituicao = $instituicao OR idInstituicao = 999 ORDER BY 2 ASC";
 	}else{
-		$sql = "SELECT * FROM $tabela";
+		$sql = "SELECT * FROM $tabela ORDER BY 2";
 	}
 	$con = bancoMysqli();
 	$query = mysqli_query($con,$sql);
