@@ -2719,8 +2719,8 @@ for($i = 0; $i < count($lista_pedido); $i++)
  {	
 	$operador = recuperaDados("ig_usuario",$lista_pedido[$i]['Contratos'],"idUsuario");
 	$status = recuperaDados("sis_estado",$lista_pedido[$i]['Status'],"idEstado");
-	$lista_pf = siscontratDocs($lista_pedido[$i]['IdProponente'],$lista_pedido[$i]['TipoPessoa']);	
-	echo '<tr><td class="list_description">'.$lista_pedido[$i]['idPedido'].'</a></td>';
+	$lista_pf = siscontratDocs($lista_pedido[$i]['IdProponente'],$lista_pedido[$i]['TipoPessoa']);
+	echo "<tr><td class='lista'> <a target='_blank' href='?perfil=detalhes_contrato&id_ped=".$lista_pedido[$i]['idPedido']."'>".$lista_pedido[$i]['idPedido']."</a></td>";
 	echo '<td class="list_description">'.$lista_pf['Nome'].'</td> ';
 	echo '<td class="list_description">'.$lista_pedido[$i]['Objeto'].'</td> ';
 	echo '<td class="list_description">'.$lista_pedido[$i]['Local'].'</td> ';
