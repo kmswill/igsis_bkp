@@ -224,12 +224,6 @@ if($campo['subEvento'] == 1){
 
             <div class="form-group">
             	<div class="col-md-offset-2 col-md-8">
-            		<label>Nome do Projeto </label>
-            		<input type="text" name="projeto" class="form-control" id=""  value="<?php echo $campo['projeto'] ?>">
-            	</div>
-             </div>
-            <div class="form-group">
-            	<div class="col-md-offset-2 col-md-8">
             		<label>Tipo de Evento *</label>
             		<select class="form-control" name="ig_tipo_evento_idTipoEvento" id="inputSubject" >
 						<option value="1"></option>
