@@ -154,6 +154,24 @@ if(isset($_POST['insereJuridica'])){ //insere pessoa jurídica
 	$idEvento = $_SESSION['idEvento'];
 	$sql_verifica_cnpj = "SELECT * FROM igsis_pedido_contratacao WHERE idPessoa = '$idPessoa' AND tipoPessoa = '2' AND publicado = '1' AND idEvento = '$idEvento' ";
 	$query_verifica_cnpj = mysqli_query($con,$sql_verifica_cnpj);
+	
+		$sql_insere_cnpj = "INSERT INTO igsis_pedido_contratacao (idPessoa, tipoPessoa, publicado, idEvento, instituicao) VALUES ('$idPessoa','2','1','$idEvento','$idInstituicao')";
+		$query_insere_cnpj = mysqli_query($con,$sql_insere_cnpj);
+		if($query_insere_cnpj){
+			$mensagem = "Pedido inserido com sucesso!";
+		}else{
+			$mensagem = "Erro ao criar pedido. Tente novamente.";
+	}
+}
+
+/*
+if(isset($_POST['insereJuridica'])){ //insere pessoa jurídica
+	$idInstituicao = $_SESSION['idInstituicao'];
+	$idPessoa = $_POST['insereJuridica'];
+	$idEvento = $_SESSION['idEvento'];
+	$sql_verifica_cnpj = "SELECT * FROM igsis_pedido_contratacao WHERE idPessoa = '$idPessoa' AND tipoPessoa = '2' AND publicado = '1' AND idEvento = '$idEvento' ";
+	$query_verifica_cnpj = mysqli_query($con,$sql_verifica_cnpj);
+	
 	$num_rows = mysqli_num_rows($query_verifica_cnpj);
 
 	if($num_rows > 0){
@@ -169,6 +187,7 @@ if(isset($_POST['insereJuridica'])){ //insere pessoa jurídica
 		 	
 	}
 }
+*/
 
 if(isset($_POST['apagarPedido'])){	
 	$idPedidoContratacao = $_POST['idPedidoContratacao'];
