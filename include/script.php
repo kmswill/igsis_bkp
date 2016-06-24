@@ -30,20 +30,7 @@
   
   $(function(){
 	$( ".processo" ).mask("9999.9999/9999999-9");
-  });
-  
-  $(function(){
-	$(".fone").mask("(00) 0000-00009");
-	$(".fone").blur(function(event) 
-		{
-		($(this).val().length == 15)
-			{ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
-			$(".fone").mask("(00) 00000-0009");
-			} else {
-			$(".fone").mask("(00) 0000-00009");
-			}
-		})
-  });
+  });  
     
 </script>
 
@@ -63,6 +50,16 @@ function mtel(v){
     v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
     return v;
 }
+
+ function mask(t, mask){
+ var i = t.value.length;
+ var saida = mask.substring(1,0);
+ var texto = mask.substring(i)
+ if (texto.substring(0,1) != saida){
+ t.value += texto.substring(0,1);
+ }
+ }
+
  </script>
 
 <script type="text/javascript">
