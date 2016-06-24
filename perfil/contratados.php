@@ -419,16 +419,16 @@ if(isset($_POST['pesquisar'])){ // inicia a busca por Razao Social ou CNPJ
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321"">
 					</div>				  
 					<div class=" col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone2" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321"" >
 					</div>
 				  </div>
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone3" name="Telefone3" placeholder="Telefone">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321">
 					</div>				  
 					<div class=" col-md-6"><strong>E-mail:</strong><br/>
 					  <input type="text" class="form-control" id="Email" name="Email" placeholder="E-mail">
@@ -681,16 +681,16 @@ if(isset($_POST['pesquisar'])){ // inicia a busca por Razao Social ou CNPJ
 
 					<div class=" col-md-6"><strong>Telefone #1 *:</strong><br/>
 
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321" >
 					</div>
 
 				  </div>
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone #2:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone2" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321" >
 					</div>				  
 					<div class="col-md-6"><strong>Telefone #3:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone3" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321" >
 					</div>
 				  </div>
 
@@ -1645,16 +1645,16 @@ case "pesquisar":
 
 					<div class=" col-md-6"><strong>Telefone #1 *:</strong><br/>
 
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321" >
 					</div>
 
 				  </div>
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone #2:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone2" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321" >
 					</div>				  
 					<div class="col-md-6"><strong>Telefone #3:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone3" placeholder="Telefone" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321" >
 					</div>
 				  </div>
 
@@ -1884,16 +1884,16 @@ $fisica = recuperaDados("sis_pessoa_fisica",$ultimo,"Id_PessoaFisica");
 
 					<div class=" col-md-6"><strong>Telefone #1 *:</strong><br/>
 
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" value="<?php echo $fisica['Telefone1']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone1']; ?>">
 					</div>
 
 				  </div>
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone #2:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone2" placeholder="Telefone" value="<?php echo $fisica['Telefone2']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone2']; ?>">
 					</div>				  
 					<div class="col-md-6"><strong>Telefone #3:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone3" placeholder="Telefone"value="<?php echo $fisica['Telefone3']; ?>" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone3']; ?>" >
 					</div>
 				  </div>
 
@@ -2866,16 +2866,16 @@ if(isset($_POST['insereRepresentante'])){
 
 					<div class=" col-md-6"><strong>Telefone #1 *:</strong><br/>
 
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" value="<?php echo $fisica['Telefone1']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone1']; ?>">
 					</div>
 
 				  </div>
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone #2:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone2" placeholder="Telefone" value="<?php echo $fisica['Telefone2']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone2']; ?>">
 					</div>				  
 					<div class="col-md-6"><strong>Telefone #3:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone3" placeholder="Telefone"value="<?php echo $fisica['Telefone3']; ?>" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $fisica['Telefone3']; ?>" >
 					</div>
 				  </div>
 
@@ -3074,16 +3074,16 @@ if(isset($_POST['insereRepresentante'])){
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" value="<?php echo $juridica['Telefone1']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone1" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $juridica['Telefone1']; ?>">
 					</div>				  
 					<div class=" col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone2" placeholder="Telefone" value="<?php echo $juridica['Telefone2']; ?>" >
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone2" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $juridica['Telefone2']; ?>" >
 					</div>
 				  </div>
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone3" name="Telefone3" placeholder="Telefone" value="<?php echo $juridica['Telefone3']; ?>">
+					  <input type="text" class="form-control" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" name="Telefone3" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $juridica['Telefone3']; ?>">
 					</div>				  
 					<div class=" col-md-6"><strong>E-mail:</strong><br/>
 					  <input type="text" class="form-control" id="Email" name="Email" placeholder="E-mail" value="<?php echo $juridica['Email']; ?>">

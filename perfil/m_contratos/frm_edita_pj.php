@@ -219,16 +219,16 @@ $res02 = siscontratDocs($pj['IdRepresentanteLegal2'],3);
 						<input type="text" class="form-control" id="Email" name="Email" placeholder="E-mail" value="<?php echo $pj['Email']; ?>" >
 					</div>
 					<div class=" col-md-6"><strong>Telefone #1 *:</strong><br/>
-						<input type="text" class="form-control" id="Telefone1" name="Telefone1" placeholder="Telefone" value="<?php echo $pj['Telefone1']; ?>">
+						<input type="text" class="form-control" name="Telefone1" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $pj['Telefone1']; ?>">
 					</div>
 				  </div>
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Telefone #2:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone1" name="Telefone2" placeholder="Telefone" value="<?php echo $pj['Telefone2']; ?>">
+					  <input type="text" class="form-control" name="Telefone2" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $pj['Telefone2']; ?>">
 					</div>				  
 					<div class="col-md-6"><strong>Telefone #3:</strong><br/>
-					  <input type="text" class="form-control" id="Telefone2" name="Telefone3" placeholder="Telefone"value="<?php echo $pj['Telefone3']; ?>" >
+					  <input type="text" class="form-control" name="Telefone3" id="telefone" onkeyup="mascara( this, mtel );" maxlength="15" placeholder="Exemplo: (11) 98765-4321" value="<?php echo $pj['Telefone3']; ?>" >
 					</div>
 				  </div>
 				 
