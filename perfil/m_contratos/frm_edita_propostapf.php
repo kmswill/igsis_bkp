@@ -400,7 +400,7 @@ $pedido = recuperaDados("igsis_pedido_contratacao",$_GET['id_ped'],"idPedidoCont
 				  <?php } ?>	
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Justificativa:</strong><br/>
-                      <textarea name="Justificativa" cols="40" rows="5"><?php echo $pedido['justificativa']; ?></textarea>
+                      <textarea disabled name="Justificativa" cols="40" rows="5"><?php echo $pedido['justificativa']; ?></textarea>
 					</div>
 				  </div>
                   <div class="form-group">
@@ -423,7 +423,7 @@ $pedido = recuperaDados("igsis_pedido_contratacao",$_GET['id_ped'],"idPedidoCont
 				  </div>
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Parecer Técnico:</strong><br/>
-					  <textarea name="ParecerTecnico" cols="40" rows="5"><?php echo $pedido['parecerArtistico']; ?></textarea><br/> <br/>
+					  <textarea disabled name="ParecerTecnico" cols="40" rows="5"><?php echo $pedido['parecerArtistico']; ?></textarea><br/> <br/>
 					</div>
                   
                   <div class="form-group">
