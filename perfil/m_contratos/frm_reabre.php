@@ -78,7 +78,7 @@ $(function(){
 	});
 });
 </script>
-<?php include "../include/menuChamado.php"; ?>
+<?php include 'includes/menu.php';?>
 <section id="inserir" class="home-section bg-white">
     <div class="container">
         <div class="row">

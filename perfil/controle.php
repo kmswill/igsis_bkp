@@ -89,6 +89,20 @@ if(isset($_POST['aprova'])){
 		}	
 	}
 }
+
+if(isset($_GET['f'])){
+	$f = $_GET['f'];	
+	if($f == 1){
+		$filtro = " AND aprovacaoFinanca = '1' ";
+	}else{
+		$filtro = " AND aprovacaoFinanca IS NULL ";
+	}
+}else{
+	$filtro = "";
+	$f = 2;	//2 é todos
+}
+
+
 ?> 
 <br />
 <br />
@@ -120,6 +134,25 @@ if(isset($_POST['aprova'])){
            <div class="form-group">
 	            <div class="col-md-offset-2 col-md-8">
    				<p>* Prazo é o número de dias restantes para o início do contrato.</p>
+                <?php 
+				switch($f){
+				case 0:
+				?>
+                <h5>[ <a href="?perfil=controle&p=pedidos">Todos os Pedidos</a> ] [ <a href="?perfil=controle&p=pedidos&f=1">Pedidos Aprovados</a> ] [ Pedidos Não aprovados ]</h5><?php
+				
+				break;
+				case 1:
+				?>
+                <h5>[ <a href="?perfil=controle&p=pedidos">Todos os Pedidos</a> ] [ Pedidos Aprovados ] [ <a href="?perfil=controle&p=pedidos&f=0">Pedidos Não aprovados</a> ]</h5><?php
+				
+				break;
+				case 2:
+				?>
+                <h5>[ Todos os Pedidos ] [ <a href="?perfil=controle&p=pedidos&f=1">Pedidos Aprovados</a> ] [ <a href="?perfil=controle&p=pedidos&f=0">Pedidos Não aprovados</a> ]</h5><?php
+				
+				break;			
+				?>
+				<?php } ?>
             	</div>
             </div>
 			<div class="table-responsive list_info">
@@ -130,7 +163,7 @@ if(isset($_POST['aprova'])){
    							<td>Tipo Pessoa</td>
 							<td>Proponente</td>
 							<td>Objeto</td>
-							<td>Local/Periodo</td>
+							<td width="15%">Local/Periodo</td>
 							<td>Verba</td>
 							<td>Valor</td>
                             <td>Prazo*</td>
@@ -144,7 +177,7 @@ if(isset($_POST['aprova'])){
 $con = bancoMysqli();
 $verbas = sqlVerbaIn($_SESSION['idUsuario']);
 $idInstituicao = $_SESSION['idInstituicao'];
-$sql = "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca FROM igsis_pedido_contratacao WHERE publicado = '1' AND idVerba IN($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC";
+$sql = "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca, idEvento FROM igsis_pedido_contratacao WHERE publicado = '1' $filtro AND idVerba IN($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC";
 
 $query = mysqli_query($con,$sql);
 $num_total = mysqli_num_rows($query);
@@ -164,7 +197,7 @@ if(isset($_GET['pag'])){
 if($num_total <= $itensPorPagina){
 	$query_pagina = $query;
 }else{
-	$sql_pagina =  "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca FROM igsis_pedido_contratacao WHERE publicado = '1' AND idVerba IN ($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC LIMIT $reg,$itensPorPagina";	
+	$sql_pagina =  "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca, idEvento FROM igsis_pedido_contratacao WHERE publicado = '1' $filtro AND idVerba IN ($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC LIMIT $reg,$itensPorPagina";	
 	$query_pagina = mysqli_query($con,$sql_pagina);
 }
 
@@ -180,7 +213,7 @@ while($linha_tabela_pedido_contratacao = mysqli_fetch_array($query_pagina))
 	echo '<td class="list_description">'.retornaPessoa($pedido['TipoPessoa']).					'</td> ';
 	echo '<td class="list_description">'.$pessoa['Nome'].						'</td> ';
 	echo '<td class="list_description">'.$pedido['Objeto'].				'</td> ';
-	echo '<td class="list_description">'.$pedido['Local'].						'</td> ';
+	echo '<td class="list_description">'.resumoOcorrencias($linha_tabela_pedido_contratacao['idEvento']).'</td> ';
 	echo '<td class="list_description">'.retornaVerba($pedido['Verba']).						'</td> ';
 	echo '<td class="list_description">'.dinheiroParaBr($pedido['ValorGlobal']).						'</td> ';
 	echo '<td class="list_description">'.prazoOrcamento($pedido['idEvento']).						'</td> ';
@@ -571,7 +604,8 @@ while($verba = mysqli_fetch_array($query)){
 break;
 case "detalhe":
 $pedido = siscontrat($_GET['pedido']);
-		$pessoa = recuperaPessoa($pedido['IdProponente'],$pedido['TipoPessoa']);
+$pessoa = recuperaPessoa($pedido['IdProponente'],$pedido['TipoPessoa']);
+$ped = recuperaDados("igsis_pedido_contratacao",$_GET['pedido'],"idPedidoContratacao");
 ?>
 	 <section id="services" class="home-section bg-white">
 		<div class="container">
@@ -597,10 +631,24 @@ $pedido = siscontrat($_GET['pedido']);
    			Verba: <strong><?php echo retornaVerba($pedido['Verba']); ?> </strong> <br />
    			Valor: <strong>R$ <?php echo dinheiroParaBr($pedido['ValorGlobal']); ?> </strong> <br />
    			Forma de Pagamento: <strong><?php echo nl2br($pedido['FormaPagamento']); ?> </strong> <br />	
- 			
+ 			Aprovação Finança: <strong><?php if($ped['aprovacaoFinanca'] == 1){ echo "Aprovado";}else{ echo "NÃO Aprovado";} ?></strong>
                   </p>      
 
-
+	         <div class="form-group">
+					<div class="col-md-offset-2 col-md-8">
+                    <?php if($ped['tipoPessoa'] == 2){ ?>
+			 <a href="?perfil=contratos&p=frm_edita_propostapj&id_ped=<?php echo $_GET['pedido'];  ?>" class="btn btn-theme btn-block" target="_blank" >Abrir o pedido no Módulo Contratos*</a>
+             <?php } else if($ped['tipoPessoa'] == 1){ ?>
+			 <a href="?perfil=contratos&p=frm_edita_propostapf&id_ped=<?php echo $_GET['pedido'];  ?>" class="btn btn-theme btn-block" target="_blank" >Abrir o pedido no Módulo Contratos*</a>
+             
+             <?php } ?>
+             </div>	
+			</div>
+					<div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    	<br />
+                </div>
+				</div>
 
 			  <div class="table-responsive list_info" >
 

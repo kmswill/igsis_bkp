@@ -24,6 +24,23 @@ switch($pag){
 			  </div>  
 			
 			<div class="table-responsive list_info">
+            <?php if(isset($_GET['f'])){
+				$f = " AND estado = ".$_GET['f'];
+				if($_GET['f'] == 1){ ?>
+		            <h5>Filtrar : [ Abertos ] [ <a href="?perfil=contratos&p=frm_chamados&f=2">Fechados</a> ] [ <a href="?perfil=contratos&p=frm_chamados">Todos </a>]</h5>
+					
+			<?php } elseif ($_GET['f'] == 2){ ?>
+		            <h5>Filtrar : [ <a href="?perfil=contratos&p=frm_chamados&f=1">Abertos</a> ] [ Fechados ] [ <a href="?perfil=contratos&p=frm_chamados">Todos </a>]</h5>
+			
+            <?php }
+			}else{
+				$f = ""; ?>
+            <h5>Filtrar : [ <a href="?perfil=contratos&p=frm_chamados&f=1">Abertos</a> ] [ <a href="?perfil=contratos&p=frm_chamados&f=2">Fechados</a> ] [ Todos ]</h5>
+					
+			<?php }
+
+			 ?>
+ 
                   <table class='table table-condensed'>
 					<thead>
 						<tr class='list_menu'>
@@ -31,13 +48,15 @@ switch($pag){
 							<td>Chamado</td>
 							<td>Data do envio</td>
 							<td>Usuário</td>
+   							<td>Status</td>
 						</tr>
 					</thead>
 					<tbody>
 					<?php
 					$con = bancoMysqli();
 					$idInstituicao = $_SESSION['idInstituicao'];
-					$sql_busca = "SELECT * FROM igsis_chamado, ig_evento WHERE igsis_chamado.idEvento = ig_evento.idEvento ORDER BY idChamado DESC";
+					$tipos = "1, 2, 3, 4, 7";
+					$sql_busca = "SELECT * FROM igsis_chamado, ig_evento WHERE igsis_chamado.idEvento = ig_evento.idEvento $f AND tipo IN($tipos) ORDER BY idChamado DESC";
 					$query_busca = mysqli_query($con,$sql_busca);
 						while($chamado = mysqli_fetch_array($query_busca)){ 
 						$tipo = recuperaDados("igsis_tipo_chamado",$chamado['tipo'],"idTipoChamado");
@@ -57,6 +76,7 @@ switch($pag){
                     </a></td>
 					<td><?php echo exibirDataHoraBr($chamado['data']) ?></td>
 					<td><?php echo $usuario['nomeCompleto'] ?></td>
+   					<td><?php if($chamado['estado'] == 1){ echo "Aberto";}else{ echo "Fechado";} ?></td>
 					</tr>					
 					<?php
 						}
@@ -104,6 +124,7 @@ if(isset ($_POST ['atualizar'])) {
 	$recuperaChamado = recuperaDados("igsis_chamado",$idChamado,"idChamado");
 	$recuperaUser = recuperaDados("ig_usuario",$recuperaChamado['idUsuario'],"idUsuario");
 	$recuperaEvento = recuperaDados("ig_evento",$recuperaChamado['idEvento'],"idEvento");
+	
 	?>
 <section id="chamado" class="home-section bg-white">
     <div class="container">
@@ -118,11 +139,42 @@ if(isset ($_POST ['atualizar'])) {
 					<div class="row">
         <div class="col-md-offset-0 col-md-12">
 	<form method="POST" action="?perfil=contratos&p=frm_chamados&pag=editar&id=<?php echo $idChamado; ?>" class="form-horizontal" role="form">
+					<div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <h4>Pedidos Relacionados</h4>
+                    <?php $outros = listaPedidoContratacao($recuperaChamado['idEvento']); 
+					 for($i = 0; $i < count($outros); $i++){
+					$dados = siscontrat($outros[$i]);
+						if($dados['TipoPessoa'] == 1){
+						?>
+            <p align="left">
+            Número do Pedido de Contratação:<b> <a href="?perfil=contratos&p=frm_edita_propostapf&id_ped=<?php echo $outros[$i]; ?>"></b><?php echo $outros[$i]; ?></a><br />
+			</p>
+            <?php 
+						}
+					if($dados['TipoPessoa'] == 2){
+						?>
+            <p align="left">
+            Número do Pedido de Contratação:<b> <a href="?perfil=contratos&p=frm_edita_propostapj&id_ped=<?php echo $outros[$i]; ?>"></b><?php echo $outros[$i]; ?></a><br />
+			</p>
+            <?php 
+						
+					}
+				
+			}		
+	
+			?>
+                    
+                    	<br />
+                </div>
+				</div>
+
 			<div class=form-group">
 				<div class="col-md-offset-2 col-md-8">
                 		<label>ID Chamado:</label>		<!-- // numero do chamado !-->		
                 		<input type="text" readonly name="idChamado" class="form-control"id="idChamado" value="<?php echo $recuperaChamado['idChamado'] ?>" /> 
 				</div> 
+                
 						<div class="col-md-offset-2 col-md-8">
 						<label>Nome do Evento:</label>
                 			<input readonly name="nomeEvento" class="form-control" id="nomeEvento" value="<?php echo $recuperaEvento['nomeEvento'] ?>"/>  </div>
