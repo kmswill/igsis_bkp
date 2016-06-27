@@ -275,6 +275,7 @@ $idEvento = $_GET['idEvento'];
 							<td>Chamado</td>
 							<td>Data do envio</td>
 							<td>Usuário</td>
+							<td>Status</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -301,6 +302,7 @@ $idEvento = $_GET['idEvento'];
                     </a></td>
 					<td><?php echo exibirDataHoraBr($chamado['data']) ?></td>
 					<td><?php echo $usuario['nomeCompleto'] ?></td>
+					<td><?php if($chamado['estado'] == 1){ echo "Aberto";}else{ echo "Fechado";} ?></td>
 					</tr>					
 					<?php
 						}
