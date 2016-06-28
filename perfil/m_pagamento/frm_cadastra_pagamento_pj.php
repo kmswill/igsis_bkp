@@ -33,9 +33,9 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 			  <div class='col-md-2'>
 				<a href='$link1?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Integral</a><br/></div>
 			  <div class='col-md-2'>
-				<a href='$link2?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
+				<a href='$link3?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
 			  <div class='col-md-2'>
-				<a href='$link3?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Recibo</a><br/></div>
+				<a href='$link5?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Recibo</a><br/></div>
 			</div>
 			
 			<div class='form-group'>
@@ -45,9 +45,9 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 			<div class='form-group'>
     		  <div class='col-md-offset-2 col-md-2'><h6>02<br/>Representantes</h6></div>
 			  <div class='col-md-2'>
-				<a href='$link4?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Integral</a><br/></div>
+				<a href='$link2?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Integral</a><br/></div>
 			  <div class='col-md-2'>
-				<a href='$link5?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
+				<a href='$link4?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
 			  <div class='col-md-2'>
 				<a href='$link6?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Recibo</a><br/></div>
 			</div>
@@ -155,10 +155,10 @@ for($i = 1; $i < count($parcelamento); $i++)
 	echo '<tr><td class="list_description">'.$i.'</td> ';
 	echo '<td class="list_description">R$ '.$parcelamento[$i]['valor'].'</td> ';
 	echo '<td class="list_description">'.$parcelamento[$i]['pagamento'].'</td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link3.'&parcela='.$i.'>1 Representante</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link4.'&parcela='.$i.'>2 Representantes</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link5.'&parcela='.$i.'>1 Representante</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link6.'&parcela='.$i.'>2 Representantes</a></td></tr>';
+	echo '<td class="list_description"><a target="_blank" href='.$link3.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link4.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link5.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link6.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td></tr>';
 } ?>	
 
 					</tbody>
