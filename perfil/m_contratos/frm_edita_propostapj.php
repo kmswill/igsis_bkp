@@ -423,7 +423,7 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
 				  		<?php if($ped['parcelas'] > 0){ ?>
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Forma de Pagamento:</strong><br/>
-                      <textarea  disabled name="FormaPagamento" class="form-control" cols="40" rows="5"><?php echo txtParcelas($_SESSION['idPedido'],$ped['parcelas']); ?> 
+                      <textarea readonly name="FormaPagamento" class="form-control" cols="40" rows="5"><?php echo txtParcelas($_SESSION['idPedido'],$ped['parcelas']); ?> 
                       
                       </textarea>
 					<p>                   </p>
@@ -494,7 +494,7 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
 				  <?php } ?>			  
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Justificativa:</strong><br/>
-                      <textarea disabled name="Justificativa" cols="40" rows="5"><?php echo $ped['justificativa'];?></textarea>
+                      <textarea readonly name="Justificativa" cols="40" rows="5"><?php echo $ped['justificativa'];?></textarea>
 					</div>
 				  </div>
                   <div class="form-group">
@@ -514,7 +514,7 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
 				  </div>
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Parecer Técnico:</strong><br/>
-					  <textarea disabled name="ParecerTecnico" cols="40" rows="5"><?php echo $ped['parecerArtistico'];?></textarea>
+					  <textarea readonly name="ParecerTecnico" cols="40" rows="5"><?php echo $ped['parecerArtistico'];?></textarea>
 					</div>
 				  </div>
                   
