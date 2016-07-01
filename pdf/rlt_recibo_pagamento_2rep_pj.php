@@ -35,9 +35,21 @@ function Header()
 
 //CONSULTA 
 $id_ped=$_GET['id'];
+$ano=date('Y');
+
+dataPagamento($id_ped);
 
 $pedido = siscontrat($id_ped);
-$pessoa = siscontratDocs($pedido['IdProponente'],1);
+$pj = siscontratDocs($pedido['IdProponente'],2);
+$ex = siscontratDocs($pedido['IdExecutante'],1);
+$rep01 = siscontratDocs($pj['Representante01'],3);
+$rep02 = siscontratDocs($pj['Representante02'],3);
+$parcelamento = retornaParcelaPagamento($id_ped);
+
+//$id_parcela = $_GET['parcela'];
+
+//$valorParcela = $parcelamento[$id_parcela]['valor'];
+//$ValorPorExtenso = valorPorExtenso(dinheiroDeBr($parcelamento[$id_parcela]['valor']));
 
 $id = $pedido['idEvento'];
 $Objeto = $pedido["Objeto"];
@@ -52,24 +64,77 @@ $Justificativa = $pedido["Justificativa"];
 $Fiscal = $pedido["Fiscal"];
 $Suplente = $pedido["Suplente"];
 
-$Nome = $pessoa["Nome"];
-$NomeArtistico = $pessoa["NomeArtistico"];
-$EstadoCivil = $pessoa["EstadoCivil"];
-$Nacionalidade = $pessoa["Nacionalidade"];
-$DataNascimento = exibirDataBr($pessoa["DataNascimento"]);
-$RG = $pessoa["RG"];
-$CPF = $pessoa["CPF"];
-$CCM = $pessoa["CCM"];
-$OMB = $pessoa["OMB"];
-$DRT = $pessoa["DRT"];
-$cbo = $pessoa["cbo"];
-$Funcao = $pessoa["Funcao"];
-$Endereco = $pessoa["Endereco"];
-$Telefones = $pessoa["Telefones"];
-$Email = $pessoa["Email"];
-$INSS = $pessoa["INSS"];
+//PessoaJuridica
 
-$ano=date('Y');
+$pjRazaoSocial = $pj["Nome"];
+$pjNomeArtistico = $pj["NomeArtistico"];
+$pjEstadoCivil = $pj["EstadoCivil"];
+$pjNacionalidade = $pj["Nacionalidade"];
+$pjRG = $pj["RG"];
+$pjCPF = $pj["CPF"];
+$pjCCM = $pj["CCM"];
+$pjOMB = $pj["OMB"];
+$pjDRT = $pj["DRT"];
+$pjFuncao = $pj["Funcao"];
+$pjEndereco = $pj["Endereco"];
+$pjTelefones = $pj["Telefones"];
+$pjEmail = $pj["Email"];
+$pjINSS = $pj["INSS"];
+$pjCNPJ = $pj['CNPJ'];
+
+$codPed = "";
+
+// Executante
+
+$exNome = $ex["Nome"];
+$exNomeArtistico = $ex["NomeArtistico"];
+$exEstadoCivil = $ex["EstadoCivil"];
+$exNacionalidade = $ex["Nacionalidade"];
+$exRG = $ex["RG"];
+$exCPF = $ex["CPF"];
+$exCCM = $ex["CCM"];
+$exOMB = $ex["OMB"];
+$exDRT = $ex["DRT"];
+$exFuncao = $ex["Funcao"];
+$exEndereco = $ex["Endereco"];
+$exTelefones = $ex["Telefones"];
+$exEmail = $ex["Email"];
+$exINSS = $ex["INSS"];
+
+// Representante01
+
+$rep01Nome = $rep01["Nome"];
+$rep01NomeArtistico = $rep01["NomeArtistico"];
+$rep01EstadoCivil = $rep01["EstadoCivil"];
+$rep01Nacionalidade = $rep01["Nacionalidade"];
+$rep01RG = $rep01["RG"];
+$rep01CPF = $rep01["CPF"];
+$rep01CCM = $rep01["CCM"];
+$rep01OMB = $rep01["OMB"];
+$rep01DRT = $rep01["DRT"];
+$rep01Funcao = $rep01["Funcao"];
+$rep01Endereco = $rep01["Endereco"];
+$rep01Telefones = $rep01["Telefones"];
+$rep01Email = $rep01["Email"];
+$rep01INSS = $rep01["INSS"];
+
+
+// Representante02
+
+$rep02Nome = $rep02["Nome"];
+$rep02NomeArtistico = $rep02["NomeArtistico"];
+$rep02EstadoCivil = $rep02["EstadoCivil"];
+$rep02Nacionalidade = $rep02["Nacionalidade"];
+$rep02RG = $rep02["RG"];
+$rep02CPF = $rep02["CPF"];
+$rep02CCM = $rep02["CCM"];
+$rep02OMB = $rep02["OMB"];
+$rep02DRT = $rep02["DRT"];
+$rep02Funcao = $rep02["Funcao"];
+$rep02Endereco = $rep02["Endereco"];
+$rep02Telefones = $rep02["Telefones"];
+$rep02Email = $rep02["Email"];
+$rep02INSS = $rep02["INSS"];
 
 
 // GERANDO O PDF:
@@ -101,83 +166,35 @@ $l=7; //DEFINE A ALTURA DA LINHA
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,'Nome:',0,0,'L');
+   $pdf->Cell(33,$l,'Nome da empresa:',0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(168,$l,utf8_decode($Nome));
+   $pdf->MultiCell(155,$l,utf8_decode($pjRazaoSocial));
    
    $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(28,$l,utf8_decode('Nome Artístico:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(152,$l,utf8_decode($NomeArtistico));
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(23,$l,utf8_decode('Estado Civil:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(35,$l,utf8_decode($EstadoCivil),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(28,$l,utf8_decode('Nacionalidade:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(35,$l,utf8_decode($Nacionalidade),0,0,'L');
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(10,$l,utf8_decode('CCM:'),0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(45,$l,utf8_decode($CCM),0,1,'L');
-   
-   $pdf->SetX($x);
+   $pdf->Cell(65,$l,utf8_decode($pjCCM),0,0,'L');
    $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(8,$l,utf8_decode('RG:'),0,0,'L');
+   $pdf->Cell(12,$l,utf8_decode('CNPJ:'),0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(50,$l,utf8_decode($RG),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(10,$l,utf8_decode('CPF:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(53,$l,utf8_decode($CPF),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(12,$l,utf8_decode('OMB:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(45,$l,utf8_decode($OMB),0,1,'L');
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(10,$l,utf8_decode('DRT:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(40,$l,utf8_decode($DRT),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(15,$l,utf8_decode('C.B.O.:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(30,$l,utf8_decode($cbo),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(15,$l,utf8_decode('Função:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(45,$l,utf8_decode($Funcao),0,1,'L');
+   $pdf->Cell(65,$l,utf8_decode($pjCNPJ),0,1,'L');
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(20,$l,utf8_decode('Endereço:'),0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(160,$l,utf8_decode($Endereco));
+   $pdf->MultiCell(160,$l,utf8_decode($pjEndereco));
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(17,$l,utf8_decode('Telefone:'),0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(87,$l,utf8_decode($Telefones),0,0,'L');
+   $pdf->Cell(75,$l,utf8_decode($pjTelefones),0,0,'L');
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(13,$l,utf8_decode('E-mail:'),0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(53,$l,utf8_decode($Email),0,1,'L');
-   
-   $pdf->SetX($x);
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(64,$l,utf8_decode('Inscrição no INSS ou nº PIS / PASEP:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(50,$l,utf8_decode($INSS),0,0,'L');
-   $pdf->SetFont('Arial','B', 10);
-   $pdf->Cell(36,$l,utf8_decode('Data de Nascimento:'),0,0,'L');
-   $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(45,$l,utf8_decode($DataNascimento),0,1,'L');
+   $pdf->Cell(65,$l,utf8_decode($pjEmail),0,1,'L');
    
    $pdf->Ln();
    
@@ -216,11 +233,13 @@ $l=7; //DEFINE A ALTURA DA LINHA
 //RODAPÉ PERSONALIZADO
    $pdf->SetXY($x,262);
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(100,$l,utf8_decode($Nome),'T',1,'L');
+   $pdf->Cell(85,$l,utf8_decode($rep01Nome),'T',0,'L');
+   $pdf->Cell(85,$l,utf8_decode($rep02Nome),'T',1,'L');
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','', 10);
-   $pdf->Cell(100,$l,"RG: ".$RG,0,0,'L');   
+   $pdf->Cell(85,$l,"RG: ".$rep01RG,0,0,'L');
+   $pdf->Cell(85,$l,"RG: ".$rep02RG,0,0,'L');
    
 $pdf->Output();
 
