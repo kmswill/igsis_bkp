@@ -225,9 +225,7 @@ function siscontrat($idPedido){
 			"extratoLiquidacao" => $pedido['extratoLiquidacao'],
 			"retencoesINSS" => $pedido['retencoesINSS'],
 			"retencoesISS" => $pedido['retencoesISS'],
-			"retencoesIRRF" => $pedido['retencoesIRRF'],
-			"notaFiscal" => $pedido['notaFiscal'],
-			"descricaoNF" => $pedido['descricaoNF']
+			"retencoesIRRF" => $pedido['retencoesIRRF']
 			);
 		
 		
@@ -638,7 +636,7 @@ function siscontratListaEvento($tipoPessoa,$instituicao,$num_registro,$pagina,$o
 	$pag = $pagina - 1;
 	$registro_inicial = $num_registro * $pag;
 	$total_paginas = $total_registros / $num_registro; // gera o número de páginas
-	$sql_lista_pagina = "SELECT * FROM igsis_pedido_contratacao, ig_evento WHERE igsis_pedido_contratacao.idEvento = ig_evento.idEvento AND (ig_evento.idUsuario = '$idUsuario' OR ig_evento.idResponsavel = '$idUsuario' OR ig_evento.suplente = '$idUsuario') AND igsis_pedido_contratacao.publicado = '1' AND ig_evento.dataEnvio IS NOT NULL $tipo AND ig_evento.idInstituicao = '$instituicao' $est ORDER BY igsis_pedido_contratacao.idPedidoContratacao $ordem LIMIT $registro_inicial,$num_registro";
+	$sql_lista_pagina = "SELECT * FROM igsis_pedido_contratacao, ig_evento WHERE igsis_pedido_contratacao.idEvento = ig_evento.idEvento AND (ig_evento.idUsuario = '$idUsuario' OR ig_evento.idResponsavel = '$idUsuario' OR ig_evento.suplente = '$idUsuario') AND igsis_pedido_contratacao.publicado = '1' AND ig_evento.dataEnvio IS NOT NULL $tipo AND ig_evento.idInstituicao = '$instituicao' $est LIMIT $registro_inicial,$num_registro";
 		$query_lista_pagina = mysqli_query($con,$sql_lista_pagina);
 	//$x = $sql_lista_pagina;
 	$i = 0;
@@ -653,13 +651,12 @@ function siscontratListaEvento($tipoPessoa,$instituicao,$num_registro,$pagina,$o
 		$fiscal = recuperaUsuario($evento['idResponsavel']);
 		$suplente = recuperaUsuario($evento['suplente']);
 		$protocolo = ""; //recuperaDados("sis_protocolo",$pedido['idEvento'],"idEvento");
-		if($pedido['parcelas'] > 0){
-			$pagamento = txtParcelas($pedido['idPedidoContratacao'],$pedido['parcelas']);	
+		if($pedido['parcelas'] > 1){
+			$pagamento = textoParcela($pedido['idPedidoContratacao'],$pedido['parcelas']);	
 		}else{
 			$pagamento = $pedido['formaPagamento'];
 		
 		}
-		
 		$x[$i] = array(
 		    "idPedido" => $pedido['idPedidoContratacao'],
 			"idEvento" => $pedido['idEvento'], 
@@ -690,7 +687,6 @@ function siscontratListaEvento($tipoPessoa,$instituicao,$num_registro,$pagina,$o
 			"EntregaNE" => $pedido['DataEntregaNotaEmpenho'],
 			"Assinatura" => "",
 			"Cargo" => "",
-			"Contratos" => $pedido['idContratos'],
 			"Status" => $pedido['estado']
 		);
 		
