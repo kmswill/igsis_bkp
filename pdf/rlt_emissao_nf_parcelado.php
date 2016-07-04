@@ -46,18 +46,17 @@ $ex = siscontratDocs($pedido['IdExecutante'],1);
 $rep01 = siscontratDocs($pj['Representante01'],3);
 $rep02 = siscontratDocs($pj['Representante02'],3);
 $parcelamento = retornaParcelaPagamento($id_ped);
-/*
+
 $id_parcela = $_GET['parcela'];
 
 $valorParcela = $parcelamento[$id_parcela]['valor'];
 $ValorPorExtenso = valorPorExtenso(dinheiroDeBr($parcelamento[$id_parcela]['valor']));
-*/
+
 
 $id = $pedido['idEvento'];
 $Objeto = $pedido["Objeto"];
 $Periodo = $pedido["Periodo"];
 $ValorGlobal = dinheiroParaBr($pedido["ValorGlobal"]);
-$ValorPorExtenso = valorPorExtenso(dinheiroDeBr($pedido["ValorGlobal"]));
 $FormaPagamento = $pedido["FormaPagamento"];
 $notaFiscal = $pedido["notaFiscal"];
 $descricaoNF = $pedido["descricaoNF"];
@@ -166,7 +165,7 @@ $l=6; //DEFINE A ALTURA DA LINHA
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(12,$l,'Valor:',0,0,'L');
    $pdf->SetFont('Arial','', 10);
-   $pdf->MultiCell(168,$l,utf8_decode("R$ $ValorGlobal"."  "."($ValorPorExtenso )"));
+   $pdf->MultiCell(168,$l,utf8_decode("R$ $valorParcela"."  "."($ValorPorExtenso )"));
    
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);

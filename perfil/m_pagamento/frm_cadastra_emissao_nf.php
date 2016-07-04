@@ -4,9 +4,11 @@ $id_ped = $_GET['id_ped'];
 $server = "http://".$_SERVER['SERVER_NAME']."/igsis/";
 $http = $server."/pdf/";
 $link1=$http."rlt_emissao_nf_integral.php";
+$link2=$http."rlt_emissao_nf_parcelado.php";
 
 $_SESSION['idPedido'] = $_GET['id_ped'];
 $pedido = recuperaDados("igsis_pedido_contratacao",$_GET['id_ped'],"idPedidoContratacao");
+$parcelamento = retornaParcelaPagamento($id_ped);
 
 
 
@@ -23,14 +25,45 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 			WHERE idPedidoContratacao = '$id_ped' ";
 	if(mysqli_query($con,$sql_atualiza_pedido))
 	{
-		$mensagem = "
-			<div class='col-md-offset-2 col-md-8'>
-				<a href='$link1?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Emissão de N.F.</a>
-			</div>	 
-			<div class='col-md-offset-2 col-md-8'>
-				<br/>
-			</div>
-		";	
+		if($pedido['parcelas'] > 1){ 
+			$men = "<br/>
+				<h5>Qual documento deseja imprimir?</h5>
+					<table class='table table-condensed'>
+					<thead>
+						<tr class='list_menu'>
+							<td></td>
+							<td>Valor</td>
+                            <td>Data</td>
+						</tr>
+					</thead>
+					<tbody>
+					
+					";
+			
+			for($i = 1; $i < count($parcelamento); $i++)
+			{
+				$men .= '
+					<tr><td class="list_description"><a target="_blank" href='.$link2.'?id='.$id_ped.'&parcela='.$i.'>EMISSÃO DE N.F. da '.$i.'ª parcela</a></td>
+						<td class="list_description">R$ '.$parcelamento[$i]['valor'].'</td> 
+						<td class="list_description">R$ '.$parcelamento[$i]['pagamento'].'</td>
+					</tr>';
+				
+			}
+			$men .="</tbody></table><br/><br/>";
+			?>
+			
+			<?php
+		}
+		else {
+			$men = "
+				<div class='col-md-offset-2 col-md-8'>
+					<a href='$link1?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Emissão de N.F.</a>
+				</div>	 
+				<div class='col-md-offset-2 col-md-8'>
+					<br/>
+				</div>
+			";	
+		}
 	}
 	else
 	{
@@ -52,6 +85,7 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 			  <div class="form-group">
 					<div class="sub-title"><h2>CADASTRO DE NOTA FISCAL</h2></div>
 					<div><?php if(isset($mensagem)){ echo $mensagem; } ?></div>
+					<div><?php if(isset($men)){ echo $men; } ?></div>
 			  </div>
 
 	  		<div class="row">
