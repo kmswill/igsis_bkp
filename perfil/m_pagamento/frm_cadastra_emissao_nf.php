@@ -3,7 +3,7 @@
 $id_ped = $_GET['id_ped'];
 $server = "http://".$_SERVER['SERVER_NAME']."/igsis/";
 $http = $server."/pdf/";
-$link1=$http."rlt_emissao_nf.php";
+$link1=$http."rlt_emissao_nf_integral.php";
 
 $_SESSION['idPedido'] = $_GET['id_ped'];
 $pedido = recuperaDados("igsis_pedido_contratacao",$_GET['id_ped'],"idPedidoContratacao");
