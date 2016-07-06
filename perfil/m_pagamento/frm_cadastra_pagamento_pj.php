@@ -8,7 +8,8 @@ $link2=$http."rlt_pagamento_integral_2rep_pj.php";
 $link3=$http."rlt_pagamento_parcelado_1rep_pj.php";
 $link4=$http."rlt_pagamento_parcelado_2rep_pj.php";
 $link5=$http."rlt_recibo_pagamento_1rep_pj.php";
-$link6=$http."rlt_recibo_pagamento_2rep_pj.php";	
+$link6=$http."rlt_recibo_pagamento_2rep_pj.php";
+$link7=$http."rlt_declaracao_simples_pj.php";
 $data = date('Y-m-d H:i:s');
 
 
@@ -36,6 +37,8 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 				<a href='$link3?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
 			  <div class='col-md-2'>
 				<a href='$link5?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Recibo</a><br/></div>
+				<div class='col-md-2'>
+				<a href='$link7?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Declaração</a><br/></div>
 			</div>
 			
 			<div class='form-group'>
@@ -50,6 +53,8 @@ if(isset($_POST['atualizar'])){ // atualiza o pedido
 				<a href='$link4?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Parcelado</a><br/></div>
 			  <div class='col-md-2'>
 				<a href='$link6?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Recibo</a><br/></div>
+				<div class='col-md-2'>
+				<a href='$link7?id=$id_ped' class='btn btn-theme btn-lg btn-block' target='_blank'>Declaração</a><br/></div>
 			</div>
 			
 			
