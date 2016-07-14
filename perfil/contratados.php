@@ -1943,7 +1943,7 @@ $fisica = recuperaDados("sis_pessoa_fisica",$ultimo,"Id_PessoaFisica");
 						<input type="submit" value="Anexos" class="btn btn-theme btn-block">
 					</form>					
 					</div>
-					<!-- Botão para verificar arquivos da pessoa -->
+					<!-- Botão para verificar 					da pessoa -->
 					<div class="col-md-6">
 					<form class="form-horizontal" role="form" action="?perfil=contratados&p=edicaoPedido" method="post">
 						<input type="hidden" name="idPedido" value="<?php echo $_SESSION['idPedido']; ?>">

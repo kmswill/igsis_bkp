@@ -50,7 +50,7 @@ $parcelamento = retornaParcelaPagamento($id_ped);
 $id_parcela = $_GET['parcela'];
 
 $valorParcela = $parcelamento[$id_parcela]['valor'];
-$ValorPorExtenso = valorPorExtenso(dinheiroDeBr($parcelamento[$id_parcela]['valor']));
+$ValorPorExtenso = valorPorExtenso(($parcelamento[$id_parcela]['valor']));
 
 
 $id = $pedido['idEvento'];
@@ -189,7 +189,7 @@ $l=6; //DEFINE A ALTURA DA LINHA
    $dia = $ocor[$i]['data'];
    $hour = $ocor[$i]['hora'];
    $lugar = $ocor[$i]['espaco'];
-  
+     
    $pdf->SetX($x);
    $pdf->SetFont('Arial','B', 10);
    $pdf->Cell(11,$l,utf8_decode('Tipo:'),0,0,'L');
