@@ -736,7 +736,7 @@ function listaOcorrencias($idEvento){ //lista ocorrencias de determinado evento
 				if($campo['libras'] == 1){$libras = "Tradução em libras";}else{$libras = "";}
 				if($campo['audiodescricao'] == 1){$audio = "Audiodescrição";}else{$audio = "";}
 				if($campo['precoPopular'] == 1){$popular = "Preço popular";}else{$popular = "";}
-				if($campo['virada'] == 1){$virada = "Virada Cultural";}else{$virada = "";}
+				if($campo['virada'] == 1){$virada = "Jornada do Patrimônio";}else{$virada = "";}
 				
 				$dia_especial =	" - Dia especial:".$libras." ".$audio." ".$popular." ".$virada;
 			}else{
@@ -755,9 +755,9 @@ function listaOcorrencias($idEvento){ //lista ocorrencias de determinado evento
 			$id = $campo['idOcorrencia'];
 			
 			if($campo['virada'] == 1){
-			$hora = "Virada Cultural";
-			$local = "Virada Cultural";
-			$espaco = "Virada Cultural";
+			$hora = "Jornada do Patrimônio";
+			$local = "Jornada do Patrimônio";
+			$espaco = "Jornada do Patrimônio";
 				
 			}
 			
@@ -861,7 +861,7 @@ function listaOcorrenciasTexto($idEvento){ //lista ocorrencias de determinado ev
 			Retirada de ingresso: $retirada  - Valor: $valor <br /></br></div>";  
 			
 			if($campo['virada'] == 1){
-			$ocorrencia = "<div class='left'>Virada Cultural 2016</br></div>";
+			$ocorrencia = "<div class='left'>Jornada do Patrimônio</br></div>";
 			}
 			
 					
@@ -1551,7 +1551,7 @@ function listaLocais($idEvento){
 	$num = mysqli_num_rows($query_virada);
 	if($num > 0){
 		
-		$locais = " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA VIRADA CULTURAL 2016.";
+		$locais = " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA JORNADA DO PATRIMÔNIO.";
 		
 	}else{
 	
@@ -1595,7 +1595,7 @@ function listaLocaisJuridico($idEvento){
 	$num = mysqli_num_rows($query_virada);
 	if($num > 0){
 		
-		$locais = " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA VIRADA CULTURAL.";
+		$locais = " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA JORNADA DO PATRIMÔNIO.";
 		
 	}else{
 	
@@ -1748,7 +1748,7 @@ function retornaPeriodo($id){ //retorna o período
 	$query_virada = mysqli_query($con,$sql_virada);
 	$num = mysqli_num_rows($query_virada);
 	if($num > 0){
-		return " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA VIRADA CULTURAL 2016.";
+		return " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA JORNADA DO PATRIMÔNIO.";
 	}else{
 	
 	
@@ -3125,9 +3125,9 @@ function listaOcorrenciasContrato($idEvento){ //lista ocorrencias de determinado
 
 			if($campo['virada'] == 1){
 				$x[$i]['tipo'] = "Virada Cultural 2016";	
-				$x[$i]['data'] = "DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA VIRADA CULTURAL 2016.";
+				$x[$i]['data'] = "DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA JORNADA DO PATRIMÔNIO.";
 				$x[$i]['hora'] = "";
-				$x[$i]['espaco'] =  " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA VIRADA CULTURAL 2016.";
+				$x[$i]['espaco'] =  " DE ACORDO COM PROGRAMAÇÃO DO EVENTO NO PERÍODO DA JORNADA DO PATRIMÔNIO.";
 
 			}
 			
