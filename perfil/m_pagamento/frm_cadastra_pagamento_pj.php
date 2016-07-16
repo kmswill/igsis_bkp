@@ -139,7 +139,7 @@ $parcelamento = retornaParcelaPagamento($id_ped);
 		
  	<section id="list_items">	
 		<div class="container">
-		<div class="col-md-offset-1 col-md-10">
+		<div class="col-md-offset-1 col-md-20">
             
 				<div class="table-responsive list_info">
 				<table class="table table-condensed">
@@ -150,6 +150,7 @@ $parcelamento = retornaParcelaPagamento($id_ped);
                             <td>Data</td>
 							<td colspan="2">PAGAMENTO</td>
 							<td colspan="2">RECIBO</td>
+							<td colspan="2">DECLARAÇÃO</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -163,7 +164,9 @@ for($i = 1; $i < count($parcelamento); $i++)
 	echo '<td class="list_description"><a target="_blank" href='.$link3.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link4.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
 	echo '<td class="list_description"><a target="_blank" href='.$link5.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
-	echo '<td class="list_description"><a target="_blank" href='.$link6.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td></tr>';
+	echo '<td class="list_description"><a target="_blank" href='.$link6.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link7.'?id='.$id_ped.'&parcela='.$i.'>1 Representante</a></td>';
+	echo '<td class="list_description"><a target="_blank" href='.$link7.'?id='.$id_ped.'&parcela='.$i.'>2 Representantes</a></td>';
 } ?>	
 
 					</tbody>

@@ -787,7 +787,7 @@ if(isset($_POST['atualizar'])){
 		$query_insere_oficinas = mysqli_query($con,$sql_insere_oficinas);
 		gravarLog($sql_insere_oficinas);
 		if($query_insere_oficinas){
-			$sql_insere_ocorrencia_inscricao = "INSERT INTO `ig_ocorrencia` (`idOcorrencia`, `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`, `idCinema`) VALUES (NULL, '1', NULL, NULL, '$idEvento', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$inicio_inscricao', '$encerra_inscricao', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL);";
+			$sql_insere_ocorrencia_inscricao = "INSERT INTO `ig_ocorrencia` (`idOcorrencia`, `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`, `idCinema`, `virada`) VALUES (NULL, '1', NULL, NULL, '$idEvento', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$inicio_inscricao', '$encerra_inscricao', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL);";
 			$query_insere_ocorrencia_inscricao = mysqli_query($con,$sql_insere_ocorrencia_inscricao);
 			if($query_insere_ocorrencia_inscricao){
 				gravarLog($sql_insere_ocorrencia_inscricao);
@@ -1589,6 +1589,12 @@ if(isset($_POST['dataInicio'])){ //carrega as variaveis vindas do POST
 		$duracao = 0;
 	}
 	
+	if(isset($_POST['virada'])){
+		$virada = 1;
+	}else{
+		$virada = 0;
+	}
+	
 	$hora = $_POST['hora'];
 	$horaInicio = $hora.":00"; //completa os segundos
 	$valorIngresso = $_POST['valorIngresso'];
@@ -1606,7 +1612,7 @@ if(isset($_POST['dataInicio'])){ //carrega as variaveis vindas do POST
 	$publicado = 1;
 }
 if(isset($_POST['inserir'])){
-	$sql_inserir = "INSERT INTO `ig_ocorrencia` (`idOcorrencia`, `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`,`idSubEvento`) VALUES (NULL, '$tipoOcorrencia', NULL, '$local', '$idEvento', '$segunda', '$terca', '$quarta', '$quinta', '$sexta', '$sabado', '$domingo', '$dataInicio', '$dataFinal', '$horaInicio', '$horaFinal', '$timezone', '$diaInteiro', '$diaEspecial', '$libras', '$audiodescricao', '$valorIngresso', '$retiradaIngresso', '$localOutros', '$lotacao', '$reservados', '$duracao', '$precoPopular', '$frequencia', '$publicado', '$idSubEvento');";
+	$sql_inserir = "INSERT INTO `ig_ocorrencia` (`idOcorrencia`, `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`,`idSubEvento`, `virada` ) VALUES (NULL, '$tipoOcorrencia', NULL, '$local', '$idEvento', '$segunda', '$terca', '$quarta', '$quinta', '$sexta', '$sabado', '$domingo', '$dataInicio', '$dataFinal', '$horaInicio', '$horaFinal', '$timezone', '$diaInteiro', '$diaEspecial', '$libras', '$audiodescricao', '$valorIngresso', '$retiradaIngresso', '$localOutros', '$lotacao', '$reservados', '$duracao', '$precoPopular', '$frequencia', '$publicado', '$idSubEvento', '$virada');";
 	if(mysqli_query($con,$sql_inserir)){
 		$mensagem = "Ocorrência inserida com sucesso!";	
 		
@@ -1641,7 +1647,9 @@ if(isset($_POST['atualizar'])){
 						 `reservados` = '$reservados',
 						  `duracao` = '$duracao',
 						   `precoPopular` = '$precoPopular',
-							`idSubEvento` = '$idSubEvento'
+							`idSubEvento` = '$idSubEvento',
+							 `virada` = '$virada'
+							
 							 WHERE 	`idOcorrencia` = '$idOc'";
 	$con = bancoMysqli();
 	if(mysqli_query($con,$sql_atualizar_ocorrencia)){
@@ -1655,7 +1663,7 @@ if(isset($_POST['atualizar'])){
 }
 if(isset($_POST['duplicar'])){
 	$idOc = $_POST['duplicar'];
-	$sql_duplicar_ocorrencia = "INSERT INTO ig_ocorrencia (`idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`) SELECT `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`  FROM ig_ocorrencia WHERE `idOcorrencia` = '$idOc'";
+	$sql_duplicar_ocorrencia = "INSERT INTO ig_ocorrencia (`idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`, `virada` ) SELECT `idTipoOcorrencia`, `ig_comunicao_idCom`, `local`, `idEvento`, `segunda`, `terca`, `quarta`, `quinta`, `sexta`, `sabado`, `domingo`, `dataInicio`, `dataFinal`, `horaInicio`, `horaFinal`, `timezone`, `diaInteiro`, `diaEspecial`, `libras`, `audiodescricao`, `valorIngresso`, `retiradaIngresso`, `localOutros`, `lotacao`, `reservados`, `duracao`, `precoPopular`, `frequencia`, `publicado`, `idSubEvento`, `virada` FROM ig_ocorrencia WHERE `idOcorrencia` = '$idOc'";
 	if(mysqli_query($con,$sql_duplicar_ocorrencia)){
 		$mensagem = "Ocorrência duplicada com sucesso!";	
 		gravarLog($sql_duplicar_ocorrencia);	
@@ -1803,6 +1811,15 @@ function habilitar(){
             		    <input type="checkbox" name="precoPopular" id="especial03" disabled="disabled"/><label  style="padding:0 10px 0 5px;">Preço popular</label>
                 	</div>                     
                 </div>
+				
+				 <div class="form-group">
+                               			
+	            	<div class="col-md-offset-2 col-md-8">
+                    <input type="checkbox" name="virada" id="virada" onclick="habilitar()"/><label  style="padding:0 20px 0 5px;">Jornada do Patrimônio</label>
+    		        
+                	</div>                     
+                </div>
+				
                 <div class="form-group">
                 	<div class="col-md-offset-2 col-md-2">
                 		<label>Horário de início</label>
@@ -2011,6 +2028,15 @@ function habilitar(){
             		    <input type="checkbox" name="precoPopular" id="especial03" disabled="disabled" <?php checar($ocor['precoPopular']) ?>/><label  style="padding:0 10px 0 5px;">Preço popular</label>
                 	</div>                     
                 </div>
+				
+				<div class="form-group">
+                               			
+	            	<div class="col-md-offset-2 col-md-8">
+                    <input type="checkbox" name="virada" id="virada" onclick="habilitar()" <?php checar($ocor['virada']) ?>/><label  style="padding:0 20px 0 5px;">Jornada do Patrimônio</label>
+    		           
+                	</div>                     
+                </div>
+				
                 <div class="form-group">
                 	<div class="col-md-offset-2 col-md-2">
                 		<label>Horário de início</label>
@@ -2135,7 +2161,15 @@ function habilitar(){
     		            <input type="checkbox" name="audiodescricao" id="especial01" disabled="disabled"/><label  style="padding:0 10px 0 5px;">Audiodescricão</label>
            			    <input type="checkbox" name="libras" id="especial02" disabled="disabled"/><label  style="padding:0 10px 0 5px;">Libras</label>
             		    <input type="checkbox" name="precoPopular" id="especial03" disabled="disabled"/><label  style="padding:0 10px 0 5px;">Preço popular</label>
-                	</div>                     
+                	</div>  
+
+                <div class="form-group">                    
+           			
+	            	<div class="col-md-offset-2 col-md-8">
+                    <input type="checkbox" name="virada" id="virada" onclick="disabled()"/><label  style="padding:0 20px 0 5px;">Jornada do Patrimônio</label>          			    
+                	</div>  
+
+					
                 </div>
                 <div class="form-group">
                 	<div class="col-md-offset-2 col-md-2">

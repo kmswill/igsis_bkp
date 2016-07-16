@@ -66,7 +66,7 @@ function siscontratLista($tipoPessoa,$instituicao,$num_registro,$pagina,$ordem,$
 		$fiscal = recuperaUsuario($evento['idResponsavel']);
 		$suplente = recuperaUsuario($evento['suplente']);
 		$protocolo = ""; //recuperaDados("sis_protocolo",$pedido['idEvento'],"idEvento");
-		if($pedido['parcelas'] > 0){
+		if($pedido['parcelas'] > 0 AND $tipoPessoa <> 4){
 			$valorTotal = somaParcela($pedido['idPedidoContratacao'],$pedido['parcelas']);
 			$formaPagamento = txtParcelas($pedido['idPedidoContratacao'],$pedido['parcelas']);	
 		}else{
@@ -141,7 +141,8 @@ function siscontrat($idPedido){
 			$viradaOcorrencia = viradaOcorrencia($pedido['idEvento']);
 			
 			if($viradaOcorrencia['bool'] == '1'){
-				$virada = "Uma hora de evento no período da Virada Cultural.";	
+				$virada = "Uma hora de evento no período da Jornada do Patrimônio .";	
+				$virada = "Uma hora de evento no período da Jornada do Patrimônio.";	
 			}else{
 				$virada = " - ";
 			}	
