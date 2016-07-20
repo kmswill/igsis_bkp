@@ -66,7 +66,7 @@ function siscontratLista($tipoPessoa,$instituicao,$num_registro,$pagina,$ordem,$
 		$fiscal = recuperaUsuario($evento['idResponsavel']);
 		$suplente = recuperaUsuario($evento['suplente']);
 		$protocolo = ""; //recuperaDados("sis_protocolo",$pedido['idEvento'],"idEvento");
-		if($pedido['parcelas'] > 0 AND $tipoPessoa <> 4){
+		if($pedido['parcelas'] > 0){
 			$valorTotal = somaParcela($pedido['idPedidoContratacao'],$pedido['parcelas']);
 			$formaPagamento = txtParcelas($pedido['idPedidoContratacao'],$pedido['parcelas']);	
 		}else{
@@ -141,8 +141,7 @@ function siscontrat($idPedido){
 			$viradaOcorrencia = viradaOcorrencia($pedido['idEvento']);
 			
 			if($viradaOcorrencia['bool'] == '1'){
-				$virada = "Uma hora de evento no período da Jornada do Patrimônio .";	
-				$virada = "Uma hora de evento no período da Jornada do Patrimônio.";	
+				$virada = "Uma hora de evento no período da Virada Cultural.";	
 			}else{
 				$virada = " - ";
 			}	
@@ -150,9 +149,17 @@ function siscontrat($idPedido){
 			
 			
 			if($pedido['parcelas'] > 0){
+
 				$pagamento = txtParcelas($idPedido,$pedido['parcelas']);	
 			}else{
 				$pagamento = $pedido['formaPagamento'];	
+			}
+			
+			if($pedido['parcelas'] > 0 AND $pedido['tipoPessoa'] == 4) {
+				$pagamento = txtParcelasFormacao ($idPedido,$pedido['parcelas']);
+			}else{
+				$pagamento = $pedido['formaPagamento'];
+				
 			}
 			
 			if($pedido['tipoPessoa'] == 4){
@@ -256,7 +263,7 @@ function siscontratFormacao($idPedido){
 		$assinatura = recuperaDados("sis_assinatura",$pedido['instituicao'],"idInstituicao");
 		$penalidades = recuperaPenalidades($pedido['idPenalidade']);
 		if($pedido['parcelas'] > 1){
-			$pagamento = txtParcelas($idPedido,$pedido['parcelas']);	
+			$pagamento = txtParcelasFormacao($idPedido,$pedido['parcelas']);	
 		}else{
 			$pagamento = $pedido['formaPagamento'];	
 		}
@@ -723,6 +730,38 @@ function txtParcelas($idPedido,$numero)
 				}
 			}
 			$texto .= "O pagamento de cada parcela se dará no 20º (vigésimo) dia após a data de entrega de toda documentação correta relativa ao pagamento.";
+			
+			return $texto;
+		}
+		else
+		{
+			return "O pagamento se dará no 20º (vigésimo) dia após a data de entrega de toda documentação correta relativa ao pagamento.";
+		}
+}
+
+function txtParcelasFormacao($idPedido,$numero)
+{
+	$con = bancoMysqli();
+	$sql = "SELECT * FROM igsis_parcelas WHERE idPedido = '$idPedido'";
+	$query = mysqli_query($con,$sql);
+	$i = 1;
+	$num_parcelas = mysqli_num_rows($query);
+	
+		if($num_parcelas > 1){
+			while($parcela = mysqli_fetch_array($query)){
+				$x[$i]['valor'] = $parcela['valor'];
+				$x[$i]['vencimento'] = $parcela['vencimento'];
+				$i++;
+			}
+			
+			$k = 1;
+			$texto = "";
+			for($k = 1; $k <= $numero; $k++){
+				if($x[$k]['valor'] != 0){
+					$texto .= $k."ª parcela de R$ ".dinheiroParaBr($x[$k]['valor']).". Entrega de documentos a partir de ".exibirDataBr($x[$k]['vencimento']).".\n";		
+				}
+			}
+			$texto .= "O pagamento de cada parcela se dará em 8 (oito) dias úteis após a data de confirmação da correta execução do(s) serviço(s).​";
 			
 			return $texto;
 		}
