@@ -94,6 +94,9 @@ $i = 0;
 					$formaPagamento = $pedido['formaPagamento'];
 				}
 
+			if ($pedido ['estado'] == 2 OR 	$pedido ['estado'] == 3 OR $pedido ['estado'] == 4 OR $pedido ['estado'] == 5 OR
+			$pedido ['estado'] == 6 OR $pedido ['estado'] == 13) {
+				
 			$x[$i]['id']= $pedido['idPedidoContratacao'];
 			$x[$i]['objeto'] = retornaTipo($event['ig_tipo_evento_idTipoEvento'])." - ".$event['nomeEvento'];
 			if($pedido['tipoPessoa'] == 1){
@@ -112,13 +115,14 @@ $i = 0;
 			$x[$i]['status'] = $pedido['estado'];	
 			$x[$i]['operador'] = $operador['nomeCompleto'];		
 			$i++;
+			}
 
 			}
 			}
 		}
 		
-			
-	}
+	}	
+	
 
 $x['num'] = $i;
 

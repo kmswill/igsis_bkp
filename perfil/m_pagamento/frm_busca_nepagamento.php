@@ -1,4 +1,5 @@
-﻿<?php include 'includes/menu.php';?>
+﻿
+<?php include 'includes/menu.php';?>
 
 <?php
 if(isset($_GET['b'])){
@@ -136,18 +137,25 @@ else
 			$x[0]['id']= $pedido['idPedidoContratacao'];
 			$x[0]['NumeroProcesso'] = $pedido['NumeroProcesso'];
 			$x[0]['objeto'] = retornaTipo($evento['ig_tipo_evento_idTipoEvento'])." - ".$evento['nomeEvento'];
-			if($pedido['tipoPessoa'] == 1)
-			{
+			
+			switch ($pedido['tipoPessoa']) {
+				case 1: 			
 				$pessoa = recuperaDados("sis_pessoa_fisica",$pedido['idPessoa'],"Id_PessoaFisica");
 				$x[0]['proponente'] = $pessoa['Nome'];
 				$x[0]['tipo'] = "Física";
-			}
-			else
-			{
+                break;
+				case 2:
 				$pessoa = recuperaDados("sis_pessoa_juridica",$pedido['idPessoa'],"Id_PessoaJuridica");
 				$x[0]['proponente'] = $pessoa['RazaoSocial'];
 				$x[0]['tipo'] = "Jurídica";
+				break;
+				case 4: 			
+				$pessoa = recuperaDados("sis_pessoa_fisica",$pedido['idPessoa'],"Id_PessoaFisica");
+				$x[0]['proponente'] = $pessoa['Nome'];
+				$x[0]['tipo'] = "Formação";
+			    break;
 			}
+			
 			$x[0]['local'] = substr($local,1);
 			$x[0]['instituicao'] = $instituicao['sigla'];
 			$x[0]['periodo'] = $periodo;

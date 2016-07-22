@@ -108,7 +108,7 @@ $con = bancoMysqli();
 	$num_registro = mysqli_num_rows($query_existe);
 if($id != "" AND $num_registro > 0){ // Foi inserido o número do pedido
 		$pedido = recuperaDados("igsis_pedido_contratacao",$id,"idPedidoContratacao");
-		if($pedido['estado'] != NULL){
+		if($pedido['estado'] > 1 ){
 			
 		$evento = recuperaDados("ig_evento",$pedido['idEvento'],"idEvento"); //$tabela,$idEvento,$campo
 		$projeto = recuperaDados("ig_projeto_especial",$pedido['idEvento'],"projetoEspecial");
