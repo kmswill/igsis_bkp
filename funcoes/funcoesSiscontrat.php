@@ -149,17 +149,14 @@ function siscontrat($idPedido){
 			
 			
 			if($pedido['parcelas'] > 0){
+				if ($pedido['tipoPessoa'] == 4){
+					$pagamento = txtParcelasFormacao ($idPedido,$pedido['parcelas']);
+				} else {
 
 				$pagamento = txtParcelas($idPedido,$pedido['parcelas']);	
+				}
 			}else{
 				$pagamento = $pedido['formaPagamento'];	
-			}
-			
-			if($pedido['parcelas'] > 0 AND $pedido['tipoPessoa'] == 4) {
-				$pagamento = txtParcelasFormacao ($idPedido,$pedido['parcelas']);
-			}else{
-				$pagamento = $pedido['formaPagamento'];
-				
 			}
 			
 			if($pedido['tipoPessoa'] == 4){
