@@ -339,7 +339,7 @@ for($h = 0; $h < $x['num']; $h++)
 	echo '<td class="list_description">'.$x[$h]['tipo'].						'</td>';
 	echo '<td class="list_description">'.$x[$h]['objeto'].						'</td>';
 	echo '<td class="list_description">'.$status['estado'].						'</td>';
-	if($x[$h]['tipo'] == 'Física')
+	if($x[$h]['tipo'] == 'Física' OR $x[$h]['tipo'] == 'Formação' )
 	{
 		echo "<td><a href='?perfil=pagamento&p=frm_cadastra_notaempenho_pf&id_ped=".$x[$h]['id']."'>NOTA DE EMPENHO</a><td>";
 		echo "<td><a href='?perfil=pagamento&p=frm_cadastra_pagamento_pf&id_ped=".$x[$h]['id']."'>PAGAMENTO</a><td>";
