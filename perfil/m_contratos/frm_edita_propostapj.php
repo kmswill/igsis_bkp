@@ -221,6 +221,7 @@ $id_ped=$_GET['id_ped'];
 
 $pedido = siscontrat($id_ped);
 
+$linha_tabelas = siscontrat($id_ped);
 
 $juridico = siscontratDocs($pedido['IdProponente'],2);
 
@@ -386,6 +387,19 @@ $res02 = siscontratDocs($ped['idRepresentante02'],3);
                   
                   <div class="form-group">
 					<div class="col-md-offset-2 col-md-8" align="left"><strong>Local:</strong> 		<?php echo $pedido['Local'];?><br/><br/>			 
+					</div>
+				  </div>
+				  
+				  <div class="form-group">
+					<div class="col-md-offset-2 col-md-8"><strong>Período:</strong><br/>
+					   <input type='text' readonly name="Periodo" class='form-control' <?php echo "value='$linha_tabelas[Periodo]'";?>><br/>	
+					</div>
+				  </div>
+				  
+                  <div class="form-group">
+					<div class="col-md-offset-2 col-md-6"><strong>Duração:</strong> <?php echo $linha_tabelas['Duracao'];?><br/>
+					</div>
+					<div class="col-md-6"><strong>Carga Horária:</strong> <?php echo $linha_tabelas['CargaHoraria'];?><br/>
 					</div>
 				  </div>
 				  
