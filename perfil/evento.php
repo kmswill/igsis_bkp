@@ -1562,6 +1562,17 @@ if(isset($_POST['dataInicio'])){ //carrega as variaveis vindas do POST
 	}else{
 		$domingo = 0;
 	}
+	if ($segunda == 0 AND $terca == 0 AND $quarta == 0 AND $quinta == 0 AND $sexta == 0 AND $sabado == 0 AND $domingo == 0){
+		$segunda = 1;
+		$terca = 1;
+		$quarta = 1;
+		$quinta = 1;
+		$sexta = 1;
+		$sabado = 1;
+		$domingo = 1;
+		
+	}
+	
 	if(isset($_POST['libras'])){
 		$libras = 1;
 	}else{
