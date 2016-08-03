@@ -98,10 +98,10 @@ $sei =
   "<p>(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) NÃO FORAM REALIZADOS A CONTENTO, PELO SEGUINTE MOTIVO:</p>".
   "<p>&nbsp;</p>".
   "<p><strong>DADOS DO SERVIDOR (A) QUE ESTÁ CONFIRMANDO OU NÃO A REALIZAÇÃO DOS SERVIÇOS:</strong></p>".
-  "<p><strong>NOME LEGÍVEL:</strong> Amilcar Ferraz Farina</p>".
+  "<p><strong>NOME LEGÍVEL:</strong> Valdilania Santana de Lima</p>".
   "<p><strong>TELEFONE DE CONTATO:</strong> (11) 3397-0167</p>".
   "<p><strong>LOTAÇÃO:</strong> SMC-DIVISÃO DE FORMAÇÃO</p>".
-  "<p><strong>REGISTRO FUNCIONAL:</strong> 804.029.0</p>".
+  "<p><strong>REGISTRO FUNCIONAL:</strong> 836.627-6 </p>".
   "<p>&nbsp;</p>".
   "<p>Com base no Relatório de Horas Trabalhadas: (Documento SEI link ) atesto que os materiais/serviços prestados discriminados no documento fiscal (Documento SEI link )  foram entregues e/ou executados a contento nos termos previstos no instrumento contratual (ou documento equivalente) no dia: ".$dataFinal.", dentro do prazo previsto. O prazo contratual é do dia ".$periodoParcela.". </p>".
   "<p>&nbsp;</p>".

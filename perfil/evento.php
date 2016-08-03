@@ -1572,7 +1572,6 @@ if(isset($_POST['dataInicio'])){ //carrega as variaveis vindas do POST
 		$domingo = 1;
 		
 	}
-	
 	if(isset($_POST['libras'])){
 		$libras = 1;
 	}else{
@@ -2499,6 +2498,7 @@ require_once("../funcoes/funcoesSiscontrat.php");
 	$evento = recuperaDados("ig_evento",$_SESSION['idEvento'],"idEvento");
 	$campos = verificaCampos($_SESSION['idEvento']);
 	$ocorrencia = verificaOcorrencias($_SESSION['idEvento']);
+	$prazo = prazoContratos($_SESSION['idEvento']);
 
 ?>   
 			  <h5> <a href="?perfil=evento&p=enviar&action=evento">Dados do evento </a>| <a href="?perfil=evento&p=enviar&action=servicos">Solicitação de serviços</a> | <a href="?perfil=evento&p=enviar&action=pedidos">Pedidos de contratação</a>  |  Pendências</h5>
@@ -2525,7 +2525,6 @@ if($campos['total'] > 0){
 if($ocorrencia > 0){
 	echo "<h4>Há ocorrências cadastradas.</h4>";	
 	echo "<br /><br />";
-	prazoContratos($_SESSION['idEvento']);
 
 }else{
 	echo "Não há ocorrências cadastradas.";
@@ -2537,6 +2536,15 @@ if($ocorrencia > 0){
             </div>
             <br />
             <br />
+            <p><?php echo $prazo['mensagem']; ?><p>
+            
+<?php
+if($ocorrencia > 0
+AND $campos['total'] == 0
+AND $prazo['fora'] == 0
+){
+
+ ?>            
             
                           <div class="form-group">
             <div class="col-md-offset-2 col-md-8">
@@ -2546,6 +2554,11 @@ if($ocorrencia > 0){
 
             </div>
         </div>
+<?php 
+}
+?>
+
+
 <?php
 break;
  } // fecha a switch action ?>	

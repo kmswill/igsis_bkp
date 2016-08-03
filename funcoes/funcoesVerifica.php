@@ -58,6 +58,7 @@ function verificaCampos($idEvento){
 	
 }
 
+
 function verificaOcorrencias($idEvento){
 	$evento = recuperaDados("ig_evento",$idEvento,"idEvento");
 	$con = bancoMysqli();
@@ -79,6 +80,7 @@ function verificaOcorrencias($idEvento){
 function prazoContratos($idEvento){ //deixar mais redondo.
 	$data = retornaDatas($idEvento);
 	$opcoes = recuperaDados("igsis_opcoes","dataContrato","opcao");
+	$mensagem = "";
 	if($opcoes['valor'] == 1){	
 		$y = explode('.',$opcoes['codigo']); // separa a tabela do campo
 		$data_inicio = $data['dataInicio'];
@@ -86,22 +88,28 @@ function prazoContratos($idEvento){ //deixar mais redondo.
 		$hoje = date("Y-m-d");
 		if($data_final >= $hoje){
 			$prazo = substr($y[1], 1);
-			echo "<h5> Você está dentro do prazo de contratos.</h5>";
-			echo "Hoje é ".exibirDataBr($hoje).".";
-			echo "
+			$mensagem .= "<h5> Você está dentro do prazo de contratos.</h5>";
+			$mensagem .= "Hoje é ".exibirDataBr($hoje).".";
+			$mensagem .= "
 			O seu evento se inicia em ".exibirDataBr($data['dataInicio'])." .<br />
 			O prazo para contratos é de <strong>$prazo </strong>dias.<br />
 			Você está <strong>dentro</strong> do prazo de contratos.";
+			$fora = 0;
 		}else{
 			$prazo = substr($y[1], 1);
-			echo "<h5> Você está fora do prazo de contratos.</h5>";
-			echo "Hoje é ".exibirDataBr($hoje).".";
-			echo "
+			$mensagem .= "<h5> Você está fora do prazo de contratos.</h5>";
+			$mensagem .= "Hoje é ".exibirDataBr($hoje).".";
+			$mensagem .= "
 			O seu evento se inicia em ".exibirDataBr($data['dataInicio'])." .<br />
 			O prazo para contratos é de <strong>$prazo </strong>dias.<br />
 			Você está <strong>fora</strong> do prazo de contratos.";
+			$fora = 1;
 		}
+		
 	}
+	$x['fora'] = $fora;
+	$x['mensagem'] = $mensagem;
+	return $x;
 
 }
 
@@ -219,5 +227,53 @@ function prazoOrcamento($idEvento){
 	return $diferenca;	
 }
 
+function verificaPedidosContratacao($idEvento){
+		// Valor - Forma de pagamento
+	
+		$total = 0;
+		$z['campos'] = ",";
+		$con = bancoMysqli();
+		$sql = "SELECT idPedidoContratacao, justificativa, parecerArtistico, parcelas, formaPagamento, valor FROM igsis_pedido_contratacao WHERE idEvento = '$idEvento' AND publicado = '1'";
+		$query = mysqli_query($con,$sql);
+		$num = mysqli_num_rows($query);
+		if($num == 0){
+			$z['total'] = $total;
+		}else{
+			$i = 0;
+			while($pedido = mysqli_fetch_array($query)){
+				//justificativa
+				if($pedido['justificativa'] == "" OR $pedido['justificativa'] == NULL){
+					$z['campos'] .= "+ Justificativa<br />";
+					$total++;
+				}
+				//parecer
+				if($pedido['parecerArtistico'] == "" OR $pedido['parecerArtistico'] == NULL){
+					$z['campos'] .= "+ Parecer Artístico<br />";	
+					$total++;
+				}  
+				// valor
+				if($pedido['parcelas'] == 0){
+					if($pedido['formaPagamento'] == "" OR $pedido['formaPagamento'] == NULL){
+						$z['campos'] .= "+ Forma de Pagamento<br />";	
+						$total++;
+					}  
+				}else if($pedido['parcelas'] > 1){
+					if($pedido['valor'] == 0){
+						$z['campos'] .= "+ Valor<br />";	
+						$total++;
+					}  
+						
+					
+				}
+				
+				
+			}
+
+		}
+		$z['n_pedidos'] = $num;
+		$z['total'] = $total;
+		return $z;
+
+}
 
 ?>

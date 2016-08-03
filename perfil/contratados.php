@@ -1327,10 +1327,22 @@ $executante = siscontratDocs($pedido['IdExecutante'],1);
 				  </div>
 			<?php } ?>
                   <div class="form-group">
-					<div class="col-md-offset-2 col-md-8"><strong>Verba:</strong><br/>
+				  <?php 
+					$idverba = $pedido['idVerba'];
+					$recupera_verba = recuperaDados("sis_verba",$pedido['idVerba'],"Id_Verba");
+					$campo_verba = $recupera_verba['Verba'];
+				  ?>
+					<div class="col-md-offset-2 col-md-8"><strong>Verba: <font color="blue"><?php echo $campo_verba; ?> (atual)</font>
+											
+					</strong> <br/>
 					  	 <select class="form-control" id="verba" name="verba" >
-					   <?php
+					    <?php
+						geraVerbaUsuario($_SESSION['idUsuario'],$pedido['idVerba']);
+						?>  
+					   
+					   <?php /*
 						geraOpcaoOrder("sis_verba",$pedido['idVerba'],"");
+						*/
 						?>  
 					  </select>
 					</div>		

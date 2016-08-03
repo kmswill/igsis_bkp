@@ -94,9 +94,7 @@ function geraOpcaoVerba($idUsuario,$selected){
 		}	
 	}
 	
-
 }
-
 function sqlVerbaIn($idUsuario){
 	$con = bancoMysqli();
 	$sql = "SELECT verba FROM ig_usuario WHERE idUsuario = '$idUsuario'";

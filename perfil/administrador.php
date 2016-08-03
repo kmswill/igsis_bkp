@@ -139,7 +139,6 @@ case "novoUser": // INSERIR NOVO USUARIO
 		$email = $_POST['email'];
 		$existe = verificaExiste("ig_usuario","email",$usuario,"0");
 		$publicado = "1";
-		$verba = $_POST['verba'];
 		if(isset($_POST['receberEmail'])){
 			$receberEmail =	1;
 		}else{
@@ -148,7 +147,7 @@ case "novoUser": // INSERIR NOVO USUARIO
 			
 	
 		if($existe['numero'] == 0){
-			$sql_inserir = "INSERT INTO `ig_usuario` (`idUsuario`, `ig_papelusuario_idPapelUsuario`, `senha`, `receberNotificacao`, `nomeUsuario`, `email`, `nomeCompleto`, `idInstituicao`, `telefone`, `publicado`, `rf`, `local`, `verba`) VALUES (NULL, '$perfil', '$senha', '$receberEmail', '$usuario', '$email', '$nomeCompleto', '$instituicao', '$telefone', '$publicado', '$rf', '$local', '$verba')";
+			$sql_inserir = "INSERT INTO `ig_usuario` (`idUsuario`, `ig_papelusuario_idPapelUsuario`, `senha`, `receberNotificacao`, `nomeUsuario`, `email`, `nomeCompleto`, `idInstituicao`, `telefone`, `publicado`, `rf`, `local`) VALUES (NULL, '$perfil', '$senha', '$receberEmail', '$usuario', '$email', '$nomeCompleto', '$instituicao', '$telefone', '$publicado', '$rf', '$local')";
 			$query_inserir = mysqli_query($con,$sql_inserir);
 			if($query_inserir){
 				$mensagem = "Usuário inserido com sucesso";
@@ -214,12 +213,6 @@ case "novoUser": // INSERIR NOVO USUARIO
 						<?php acessoPerfilUser("ig_papelusuario","3",""); ?>
 						</select>
 					</div>  <!--  // Email !-->
-					
-					<div class="col-md-offset-2 col-md-8">  
-					<label>Verbas:</label>
-					<input type="text" name="verba" class="form-control" id="verba" value=""/>
-					</div>
-										
 					<div class="col-md-offset-2 col-md-8">  
 					<label>Email para cadastro:</label>
 					<input type="text" name="email" class="form-control" id="email" value=""/>
@@ -281,7 +274,6 @@ if (isset ($_POST ['resetSenha'])) {
 		$perfil = $_POST['papelusuario'];
 		$rf	=	$_POST['rf'];
 		$email = $_POST['email'];	
-		$verba = $_POST['verba'];
 		if(isset($_POST['receberEmail'])){
 			$receberEmail =	1;
 		}else{
@@ -291,13 +283,12 @@ if (isset ($_POST ['resetSenha'])) {
 				$sql_atualizar = "UPDATE `ig_usuario`SET
 			`nomeCompleto`= '$nomeCompleto',
 			`nomeUsuario`= '$nomeUsuario', 
-			`telefone`= '$telefone',
-			`idInstituicao` = '$instituicao',
-			`local`= '$local',
+				`telefone`= '$telefone',
+				`idInstituicao` = '$instituicao',
+				`local`= '$local',
 			`ig_papelusuario_idPapelUsuario`= '$perfil',
 			`rf`= '$rf',	
 			`email`= '$email', 
-			`verba`= '$verba',
 			`receberNotificacao`= '$receberEmail'			
 			WHERE `idUsuario` = '$usuario' ";
 				$con = bancoMysqli();
@@ -365,10 +356,6 @@ if (isset ($_POST ['resetSenha'])) {
 					<label>RF:</label>
 					<input type="text" name="rf" class="form-control" value="<?php echo $recuperaUsuario ['rf']?>"/>
 					</div> <!--  // Email !-->
-					<div class="col-md-offset-2 col-md-8">  
-					<label>Verbas:</label>
-					<input type="text" name="verba" class="form-control" id="verba" value="<?php echo $recuperaUsuario['verba'] ?>"/>
-					</div>
 					<div class="col-md-offset-2 col-md-8">  
 					<label>Email para cadastro:</label>
 					<input type="text" name="email" class="form-control" id="email" value="<?php echo $recuperaUsuario ['email']?>"/>

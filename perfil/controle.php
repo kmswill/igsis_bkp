@@ -160,6 +160,7 @@ if(isset($_GET['f'])){
 					<thead>
 						<tr class="list_menu">
 							<td>Cod.</td>
+							<td>Envio</td>
    							<td>Tipo Pessoa</td>
 							<td>Proponente</td>
 							<td>Objeto</td>
@@ -177,7 +178,7 @@ if(isset($_GET['f'])){
 $con = bancoMysqli();
 $verbas = sqlVerbaIn($_SESSION['idUsuario']);
 $idInstituicao = $_SESSION['idInstituicao'];
-$sql = "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca, idEvento FROM igsis_pedido_contratacao WHERE publicado = '1' $filtro AND idVerba IN($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC";
+$sql = "SELECT igsis_pedido_contratacao.idPedidoContratacao, igsis_pedido_contratacao.tipoPessoa, igsis_pedido_contratacao.idPessoa, igsis_pedido_contratacao.aprovacaoFinanca, ig_evento.dataEnvio, ig_evento.idEvento	 FROM igsis_pedido_contratacao,ig_evento WHERE igsis_pedido_contratacao.publicado = '1' $filtro AND idVerba IN($verbas) AND igsis_pedido_contratacao.estado IS NOT NULL AND ig_evento.idEvento = igsis_pedido_contratacao.idEvento ORDER BY ig_evento.dataEnvio DESC";
 
 $query = mysqli_query($con,$sql);
 $num_total = mysqli_num_rows($query);
@@ -197,7 +198,7 @@ if(isset($_GET['pag'])){
 if($num_total <= $itensPorPagina){
 	$query_pagina = $query;
 }else{
-	$sql_pagina =  "SELECT idPedidoContratacao, tipoPessoa, idPessoa, aprovacaoFinanca, idEvento FROM igsis_pedido_contratacao WHERE publicado = '1' $filtro AND idVerba IN ($verbas) AND estado IS NOT NULL ORDER BY idPedidoContratacao DESC LIMIT $reg,$itensPorPagina";	
+	$sql_pagina =  "SELECT igsis_pedido_contratacao.idPedidoContratacao, igsis_pedido_contratacao.tipoPessoa, igsis_pedido_contratacao.idPessoa, igsis_pedido_contratacao.aprovacaoFinanca, ig_evento.dataEnvio, ig_evento.idEvento FROM igsis_pedido_contratacao,ig_evento WHERE igsis_pedido_contratacao.publicado = '1' $filtro AND idVerba IN($verbas) AND igsis_pedido_contratacao.estado IS NOT NULL AND ig_evento.idEvento = igsis_pedido_contratacao.idEvento ORDER BY ig_evento.dataEnvio DESC LIMIT $reg,$itensPorPagina";	
 	$query_pagina = mysqli_query($con,$sql_pagina);
 }
 
@@ -210,6 +211,7 @@ while($linha_tabela_pedido_contratacao = mysqli_fetch_array($query_pagina))
 	$pedido = siscontrat($linha_tabela_pedido_contratacao['idPedidoContratacao']);
 	$pessoa = siscontratDocs($linha_tabela_pedido_contratacao['idPessoa'],$linha_tabela_pedido_contratacao['tipoPessoa']);
 	echo "<tr><td class='lista'> <a href='?perfil=controle&p=detalhe&pedido=".$linha_tabela_pedido_contratacao['idPedidoContratacao']."' target='_blank'>".$linha_tabela_pedido_contratacao['idPedidoContratacao']."</a></td>";
+	echo '<td class="list_description">'.exibirDataBr($linha_tabela_pedido_contratacao['dataEnvio']).					'</td> ';
 	echo '<td class="list_description">'.retornaPessoa($pedido['TipoPessoa']).					'</td> ';
 	echo '<td class="list_description">'.$pessoa['Nome'].						'</td> ';
 	echo '<td class="list_description">'.$pedido['Objeto'].				'</td> ';
@@ -266,7 +268,7 @@ while($linha_tabela_pedido_contratacao = mysqli_fetch_array($query_pagina))
 			</div>
 		</div>
 	</section>
-    <?php var_dump($sql_pagina) ?>
+
 
    <?php 
    break;

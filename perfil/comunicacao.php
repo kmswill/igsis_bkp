@@ -454,6 +454,7 @@ if($verifica == 1){
 					
 
 					$con = bancoMysqli();
+					/*
 					$sql_busca_dic = "SELECT DISTINCT idEvento FROM ig_ocorrencia WHERE 
 					(".
 					"(dataInicio >= '$data_inicio' AND dataInicio <= '$data_final')". // o evento começa no período
@@ -463,6 +464,10 @@ if($verifica == 1){
 					") AND publicado = '1' ".
 					
 					"  ORDER BY dataInicio ASC";
+					*/
+					$loc = recuperaDados("ig_usuario",$_SESSION['idUsuario'],"idUsuario");
+					$local = $loc['local'];
+					$sql_busca_dic = "SELECT DISTINCT idEvento FROM igsis_agenda WHERE idLocal IN($local) AND data <= '$data_final' AND data >= '$data_inicio' ORDER BY idTipo"; 
 					  
 					$query_busca_dic = mysqli_query($con,$sql_busca_dic);
 						while($evento = mysqli_fetch_array($query_busca_dic)){ 

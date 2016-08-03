@@ -231,7 +231,7 @@ $l=7; //DEFINE A ALTURA DA LINHA
    
    
 //RODAPÉ PERSONALIZADO
-   $pdf->SetXY($x,262);
+   $pdf->SetXY($x,220);
    $pdf->SetFont('Arial','', 10);
    $pdf->Cell(85,$l,utf8_decode($rep01Nome),'T',0,'L');
    $pdf->Cell(85,$l,utf8_decode($rep02Nome),'T',1,'L');
@@ -239,7 +239,13 @@ $l=7; //DEFINE A ALTURA DA LINHA
    $pdf->SetX($x);
    $pdf->SetFont('Arial','', 10);
    $pdf->Cell(85,$l,"RG: ".$rep01RG,0,0,'L');
-   $pdf->Cell(85,$l,"RG: ".$rep02RG,0,0,'L');
+   $pdf->Cell(85,$l,"RG: ".$rep02RG,0,1,'L');
+   
+   $pdf->Ln();
+   
+   $pdf->SetX($x);
+   $pdf->SetFont('Arial','', 10);
+   $pdf->MultiCell(180,$l,utf8_decode("OBSERVAÇÃO: A validade deste recibo fica condicionada ao efetivo por ordem de pagamento ou depósito na conta corrente no Banco do Brasil, indicada pelo contratado, ou na falta deste, ao recebimento no Departamento do Tesouro da Secretaria das Finanças e Desenvolvimento Econômico, situado à Rua Pedro Américo, 32."));
    
 $pdf->Output();
 

@@ -3759,4 +3759,21 @@ function retornaVerbaMultiplas($idPedido){
 	return $x;
 }
 
+function geraVerbaUsuario($usuario,$idverba){
+	$con = bancoMysqli();
+	$usuario = recuperaDados("ig_usuario",$usuario,"idUsuario");
+	$verba = $usuario['verba'];
+	$sql = "SELECT * FROM sis_verba	WHERE Id_Verba IN ($verba) ORDER BY Verba";
+	$query = mysqli_query($con,$sql);
+	while($verbas = mysqli_fetch_array($query)){
+		if($verbas['Id_Verba'] == $idverba){
+			echo "<option value='".$verbas['Id_Verba']."' selected >".$verbas['Verba']."</option>";	
+		}else{
+			echo "<option value='".$verbas['Id_Verba']."' >".$verbas['Verba']."</option>";	
+			
+		}	
+	}
+}
+
+
 ?>
