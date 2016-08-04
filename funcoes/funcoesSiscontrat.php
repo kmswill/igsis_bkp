@@ -1124,6 +1124,7 @@ function recuperaVerba($idverba){ //dados da tabela sis_verba
 		$y['reservapf'] = $x['NumeroReservaPF'];
 		$y['linkpf'] = $x['LinkPF'];
 		$y['vocativo'] = $x['Vocativo'];
+		$y['NovoNumeroReservaPJ'] = $x['NovoNumeroReservaPJ'];
 		
 		return $y;
 }

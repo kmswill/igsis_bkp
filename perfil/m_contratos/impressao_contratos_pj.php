@@ -39,6 +39,7 @@ $link27 = $http."rlt_termo_parceria_pj.php";
 $link28 = $http."rlt_pedido_reserva_existente_pj.php";
 $link29 = $http."rlt_pedido_reserva_transferencia_virada_pj.php";
 $link30 = $http."rlt_pedido_reserva_transferencia_virada_centro_pj.php";
+$link31 = $http."rlt_pedido_reserva_existente_pj_ccsp.php";
 
 
 	 $last_id = mysqli_insert_id($conexao);
@@ -140,9 +141,8 @@ $link30 = $http."rlt_pedido_reserva_transferencia_virada_centro_pj.php";
 			<td><a href='$link11?id=$id_ped' target='_blank'><strong>FEPAC</strong></a></td>
 		</tr>
 		<tr>
-			<td><a href='$link29?id=$id_ped' target='_blank'><strong>Reserva de Verba com Transferência - VIRADA</strong></a></td>
-		
-			<td></td>
+			<td><a href='$link31?id=$id_ped' target='_blank'><strong>Reserva Existente - Centros Culturais</strong></a></td>
+			<td><a href='$link29?id=$id_ped' target='_blank'><strong>Reserva de Verba com Transferência - VIRADA</strong></a></td>			
 		</tr>
 		
 	  </tbody>
