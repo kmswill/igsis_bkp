@@ -40,6 +40,7 @@ $link28 = $http."rlt_pedido_reserva_existente_pj.php";
 $link29 = $http."rlt_pedido_reserva_transferencia_virada_pj.php";
 $link30 = $http."rlt_pedido_reserva_transferencia_virada_centro_pj.php";
 $link31 = $http."rlt_pedido_reserva_existente_pj_ccsp.php";
+$link32 = $http."rlt_normas_internas_teatros_pj.php"."?id=".$id_ped;
 
 
 	 $last_id = mysqli_insert_id($conexao);
@@ -89,6 +90,10 @@ $link31 = $http."rlt_pedido_reserva_existente_pj_ccsp.php";
 		
 		<tr>
 			<td><a href='$link25' target='_blank'><strong>Exposição | Outros</strong></a></td>
+		</tr>
+		
+		<tr>
+			<td colspan='2'><a href='$link32' target='_blank'><strong>NORMAS INTERNAS - Teatro Distrital</strong></a></td>
 		</tr>
 		
 		<tr><td class='list_description'><br/></td></tr>

@@ -45,6 +45,7 @@ $link33 = $http."rlt_pedido_contratacao_pf_formacao.php";
 $link34 = $http."rlt_pedido_reserva_transferencia_pf.php";
 $link35 = $http."rlt_pedido_reserva_transferencia_virada_pf.php";
 $link36 = $http."rlt_pedido_reserva_transferencia_virada_centro_pf.php";
+$link37 = $http."rlt_normas_internas_teatros_pf.php"."?id=".$id_ped;
  
  
 	 $last_id = mysqli_insert_id($conexao);
@@ -104,6 +105,10 @@ $link36 = $http."rlt_pedido_reserva_transferencia_virada_centro_pf.php";
 		<tr>
 			<td><a href='$link29' target='_blank'><strong>Vocacional</strong></a></td>
 			<td><a href='$link30?id=$id_ped' target='_blank'><strong>PIÁ</strong></a></td>
+		</tr>
+		
+		<tr>
+			<td colspan='2'><a href='$link37' target='_blank'><strong>NORMAS INTERNAS - Teatro Distrital</strong></a></td>
 		</tr>
 		
 		<tr><td class='list_description'><br/></td></tr>
