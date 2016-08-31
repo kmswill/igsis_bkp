@@ -1,11 +1,9 @@
-
 <?php
 include 'includes/menu.php';
 $conexao = bancoMysqli();
 $_SESSION['idPedido'] = $_GET['id_ped'];
 $id_ped = $_GET['id_ped'];
 $id = $id_ped;
-
 $server = "http://".$_SERVER['SERVER_NAME']."/igsis"; //mudar para pasta do igsis
 $http = $server."/pdf/";
 $link0 = $http."rlt_pedido_contratacao_pj.php";
@@ -41,8 +39,9 @@ $link29 = $http."rlt_pedido_reserva_transferencia_virada_pj.php";
 $link30 = $http."rlt_pedido_reserva_transferencia_virada_centro_pj.php";
 $link31 = $http."rlt_pedido_reserva_existente_pj_ccsp.php";
 $link32 = $http."rlt_normas_internas_teatros_pj.php"."?id=".$id_ped;
-
-
+$link33 = $http."rlt_proposta_exposicao_edital_pj.php"."?id=".$id_ped."&penal=22";
+$link34 = $http."rlt_proposta_mediacao_edital_pj.php"."?id=".$id_ped."&penal=24";
+$link35 = $http."rlt_proposta_contadores_edital_pj.php"."?id=".$id_ped."&penal=26";
 	 $last_id = mysqli_insert_id($conexao);
 	 echo "
 	 
@@ -90,6 +89,12 @@ $link32 = $http."rlt_normas_internas_teatros_pj.php"."?id=".$id_ped;
 		
 		<tr>
 			<td><a href='$link25' target='_blank'><strong>Exposição | Outros</strong></a></td>
+			<td><a href='$link33?id=$id_ped' target='_blank'><strong>Edital - Exposição</strong></a></td>
+		</tr>
+		
+		<tr>
+			<td><a href='$link34?id=$id_ped' target='_blank'><strong>Edital - Mediação</strong></a></td>
+			<td><a href='$link35?id=$id_ped' target='_blank'><strong>Edital - Contação de Histórias </strong></a></td>
 		</tr>
 		
 		<tr>
@@ -126,7 +131,6 @@ $link32 = $http."rlt_normas_internas_teatros_pj.php"."?id=".$id_ped;
 			<td><a href='$link8?id=$id_ped' target='_blank'><strong>Parecer da Comissão</strong></a></td>
 			<td><a href='$link23?id=$id_ped' target='_blank'><strong>Ordem de Serviço</strong></a></td>
 		</tr>
-
 		<tr>
 			<td><a href='$link26?id=$id_ped' target='_blank'><strong>Termo de Doação</strong></a></td>
 			<td><a href='$link27?id=$id_ped' target='_blank'><strong>Termo de Parceria</strong></a></td>
@@ -157,8 +161,4 @@ $link32 = $http."rlt_normas_internas_teatros_pj.php"."?id=".$id_ped;
 </div>
 </div>
 </section>";
-
 ?>
-
-
-
