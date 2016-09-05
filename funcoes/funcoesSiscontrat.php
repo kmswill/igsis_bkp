@@ -66,6 +66,7 @@ function siscontratLista($tipoPessoa,$instituicao,$num_registro,$pagina,$ordem,$
 		$fiscal = recuperaUsuario($evento['idResponsavel']);
 		$suplente = recuperaUsuario($evento['suplente']);
 		$protocolo = ""; //recuperaDados("sis_protocolo",$pedido['idEvento'],"idEvento");
+		$verba = recuperaDados("sis_verba",$pedido['idVerba'],"Id_Verba");
 		if($pedido['parcelas'] > 0){
 			$valorTotal = somaParcela($pedido['idPedidoContratacao'],$pedido['parcelas']);
 			$formaPagamento = txtParcelas($pedido['idPedidoContratacao'],$pedido['parcelas']);	
@@ -110,6 +111,7 @@ function siscontratLista($tipoPessoa,$instituicao,$num_registro,$pagina,$ordem,$
 			"Instituicao" => $instituicao['instituicao'],
 			"Sigla" => $instituicao['sigla'],
 			"Contratos" => $pedido['idContratos'],
+			"parcelas" => $pedido['parcelas'],
 			"Status" => $pedido['estado']
 		);
 		

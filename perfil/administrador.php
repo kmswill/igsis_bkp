@@ -63,8 +63,7 @@ case "inicio":
 				<a href="?perfil=administrador&p=listaprojetoespecial" class="btn btn-theme btn-lg btn-block">Listar Projeto especial</a>
 			<!--	<a href="?perfil=administrador&p=logsLocais" class="btn btn-theme btn-lg btn-block">Logs Locais</a> 
 	<a href="?perfil=administrador&p=reabertura" class="btn btn-theme btn-lg btn-block">Reabrir pedidos enviados</a> !-->
-				<a href="?perfil=administrador&p=alteracoes" class="btn btn-theme btn-lg btn-block">Alterações</a>
-   				<a href="?perfil=administrador&atualizar=agenda" class="btn btn-theme btn-lg btn-block">Atualizar agenda</a>
+				<a href="?perfil=administrador&p=alteracoes" class="btn btn-theme btn-lg btn-block">Chamados</a>
   	        </div>
           </div>
         </div>

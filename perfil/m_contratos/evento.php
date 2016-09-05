@@ -51,6 +51,14 @@ case "evento":
 
             <p align="left"><?php descricaoEspecificidades($_GET['id_ped'],$evento['ig_tipo_evento_idTipoEvento']); ?></p>
 
+			<?php
+		if($evento['subEvento'] == '1'){
+		 ?>
+		<h5>Sub-eventos</h5>
+			<div class="left">
+		<?php listaSubEventosCom($idEvento) ?>
+			</div>
+		<?php } ?>
 
 <h5>Arquivos anexos</h5>
 <p align="left">	<?php listaArquivosDetalhe($_GET['id_ped']) ?>	</p>			
