@@ -38,14 +38,24 @@ $final = str_replace("rfSuplente", $rfSuplente, $final);
 	  		<div class="row">
 	  			<div class="col-md-offset-1 col-md-10">
 
-                    			  
+                  <div class="form-group"> 
+					<div class="col-md-offset-2 col-md-8"><h5><?php echo $linha_tabelas['Objeto'];?></h5>
+					<a class="btn btn-theme btn-lg btn-block" href="?perfil=detalhes_contrato&id_ped=<?php echo "$id_ped";?>" target="_blank">Detalhes do Evento</a>
+                    </div>
+                  </div>
+
+				  <div class="form-group"> 
+					<div class="col-md-offset-2 col-md-8"><br/>
+                    </div>
+                  </div>				  
 					
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Código do Pedido de Contratação:</strong><br/><?php echo "$id_ped";?>					  
 					</div>                                        
 					<div class="col-md-6"><strong>Número do Processo:</strong><br/><?php echo $pedido['NumeroProcesso']; ?>
 					</div>
-                  </div> 
+                  </div> 			  
+				  
 				  <div class="form-group"> 
 					<div class="col-md-offset-2 col-md-8"><strong>Contratado:</strong><br/><?php echo $fisico['Nome'];?>
                     </div>
