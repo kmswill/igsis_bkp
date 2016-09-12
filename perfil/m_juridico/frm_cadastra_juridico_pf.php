@@ -48,6 +48,8 @@ $final = str_replace("rfSuplente", $rfSuplente, $final);
 					<div class="col-md-offset-2 col-md-8"><br/>
                     </div>
                   </div>				  
+				  
+				  <form class="form-horizontal" role="form" action="?perfil=juridico&p=update_juridico_pf&id_ped=<?php echo $_GET['id_ped']; ?>" method="post">	
 					
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-6"><strong>Código do Pedido de Contratação:</strong><br/><?php echo "$id_ped";?>					  
@@ -61,7 +63,22 @@ $final = str_replace("rfSuplente", $rfSuplente, $final);
                     </div>
                   </div>
 				  
-				  <form class="form-horizontal" role="form" action="?perfil=juridico&p=update_juridico_pf&id_ped=<?php echo $_GET['id_ped']; ?>" method="post">	
+				  <div class="form-group">
+					<div class="col-md-offset-2 col-md-8"><strong>Local:</strong><br/><?php echo $linha_tabelas['LocalJuridico'];?>
+					</div>
+				  </div>
+				  
+				  <div class="form-group">
+					<div class="col-md-offset-2 col-md-6"><strong>Valor:</strong><br/><?php echo $linha_tabelas['ValorGlobal'];?>					  
+					</div>                                        
+					<div class="col-md-6"><strong>Período:</strong><br/><?php echo $linha_tabelas['Periodo']; ?>
+					</div>
+                  </div>
+				  
+				  <div class="form-group">
+					<div class="col-md-offset-2 col-md-8"><strong>Forma de Pagamento:</strong><br/><?php echo $linha_tabelas['FormaPagamento'];?>
+					</div>
+				  </div>		
 				  
                   <div class="form-group"> 
 					<div class="col-md-offset-2 col-md-8"><strong>Amparo:</strong><br/>

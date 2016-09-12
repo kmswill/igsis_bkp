@@ -26,6 +26,17 @@ $ano=date('Y');
 
 	  		<div class="row">
 	  			<div class="col-md-offset-1 col-md-10">
+				
+				  <div class="form-group"> 
+					<div class="col-md-offset-2 col-md-8"><h5><?php echo $linha_tabelas['Objeto'];?></h5>
+					<a class="btn btn-theme btn-lg btn-block" href="?perfil=detalhes_contrato&id_ped=<?php echo "$id_ped";?>" target="_blank">Detalhes do Evento</a>
+                    </div>
+                  </div>
+
+				  <div class="form-group"> 
+					<div class="col-md-offset-2 col-md-8"><br/>
+                    </div>
+                  </div>
 
                     <form class="form-horizontal" role="form" action="?perfil=juridico&p=update_juridico_pj&id_ped=<?php echo $_GET['id_ped']; ?>" method="post">				  
 					
@@ -40,11 +51,6 @@ $ano=date('Y');
 					<div class="col-md-offset-2 col-md-8"><strong>Contratado:</strong><br/><?php echo $fisico['Nome'];?>
                     </div>
                   </div>
-				  
-				  <div class="form-group">
-					<div class="col-md-offset-2 col-md-8"><strong>Objeto:</strong><br/><?php echo $linha_tabelas['Objeto'];?>
-					</div>
-				  </div>
 				  
 				  <div class="form-group">
 					<div class="col-md-offset-2 col-md-8"><strong>Local:</strong><br/><?php echo $linha_tabelas['LocalJuridico'];?>
