@@ -47,6 +47,8 @@ $link37 = $http."rlt_normas_internas_teatros_pf.php"."?id=".$id_ped;
 $link38 = $http."rlt_proposta_exposicao_edital_pf.php"."?id=".$id_ped."&penal=23";
 $link39 = $http."rlt_proposta_mediacao_edital_pf.php"."?id=".$id_ped."&penal=25";
 $link40 = $http."rlt_proposta_contadores_edital_pf.php"."?id=".$id_ped."&penal=26";
+$link41 = $http."rlt_proposta_galadeballet_edital_pf.php"."?id=".$id_ped."&penal=29";
+
  
  
 	 $last_id = mysqli_insert_id($conexao);
@@ -115,10 +117,12 @@ $link40 = $http."rlt_proposta_contadores_edital_pf.php"."?id=".$id_ped."&penal=2
 		
 		<tr>
 			<td><a href='$link40?id=$id_ped' target='_blank'><strong>Edital - Contação de Histórias</strong></a></td>
+		    <td><a href='$link37' target='_blank'><strong>NORMAS INTERNAS - Teatro Distrital</strong></a></td>
+
 		</tr>	
 		
 		<tr>
-			<td colspan='2'><a href='$link37' target='_blank'><strong>NORMAS INTERNAS - Teatro Distrital</strong></a></td>
+			<td><a href='$link41?id=$id_ped' target='_blank'><strong>Edital - Gala de Balé</strong></a></td>
 		</tr>
 		
 		<tr><td class='list_description'><br/></td></tr>
