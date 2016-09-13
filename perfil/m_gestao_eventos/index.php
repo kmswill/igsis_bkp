@@ -8,9 +8,9 @@
 				<div class="section-heading">
 					 <h3>Bem-vindo(a) à IGSIS!</h3>
                      <p>&nbsp;</p>
-                     <h2>Módulo Gestão de Prazos</h2>
+                     <h2>Módulo Gestão de Prazos para Eventos</h2>
                      <p>&nbsp;</p
-					 <p>Esse módulo tem a função de cancelar ou aprovar pedidos de contratação com prazos expirados.</p>
+					 <p>Esse módulo tem a função de aprovar eventos sem pedidos de contratação com prazos expirados.</p>
 				</div>
 			</div>
 		</div>

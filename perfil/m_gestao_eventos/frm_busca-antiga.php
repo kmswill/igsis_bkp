@@ -30,8 +30,8 @@ if($id == "" AND $evento == "" AND $fiscal == 0 AND $juridico == 0 AND $projeto 
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<div class="section-heading">
-					<h2>Busca por evento</h2>
-					<p>É preciso ao menos um critério de busca ou você pesquisou por um evento inexistente. Tente novamente.</p>
+					<h2>Busca por pedido</h2>
+					<p>É preciso ao menos um critério de busca ou você pesquisou por um pedido inexistente. Tente novamente.</p>
 				</div>
 			</div>
 		</div>
@@ -84,7 +84,10 @@ if($id == "" AND $evento == "" AND $fiscal == 0 AND $juridico == 0 AND $projeto 
 <?php
 }else{
 $con = bancoMysqli();
-	$sql_existe = "SELECT idPedidoContratacao,idEvento,estado FROM igsis_pedido_contratacao WHERE idEvento = '$evento' AND publicado = '1' AND estado IS NOT NULL ORDER BY idEvento DESC";
+	$x = recuperaDados("ig_usuario",$_SESSION['idUsuario'],"idUsuario");
+	$local = $x['local'];
+	$sql_existe = "SELECT DISTINCT idEvento FROM ig_ocorrencia WHERE publicado = 1 AND idEvento IN (SELECT idEvento FROM ig_evento WHERE publicado = 1 AND dataEnvio IS NULL AND idEvento NOT IN (SELECT idEvento FROM igsis_pedido_contratacao WHERE publicado = 1 AND estado IS NOT NULL) )SELECT idEvento FROM ig_ocorrencia WHERE publicado = 1 AND idEvento IN (SELECT idEvento FROM ig_evento WHERE publicado = 1 AND dataEnvio IS NULL AND idEvento NOT IN (SELECT idEvento FROM igsis_pedido_contratacao WHERE publicado = 1 AND estado IS NOT NULL)) 
+AND local IN ($local) ORDER BY idEvento DESC";
 	$query_existe = mysqli_query($con, $sql_existe);
 	$num_registro = mysqli_num_rows($query_existe);
 if($id != "" AND $num_registro > 0){ // Foi inserido o número do pedido
@@ -203,8 +206,8 @@ $mensagem = "Foram encontradas ".$x['num']." pedido(s) de contratação.";
 	<section id="list_items">
 		<div class="container">
 			 <h3>Resultado da busca</3>
-             <h5>Foram encontrados <?php echo $x['num']; ?> eventos.</h5>
-             <h5><a href="?perfil=gestao_eventos&p=frm_busca">Fazer outra busca</a></h5>
+             <h5>Foram encontrados <?php echo $x['num']; ?> pedidos de contratação.</h5>
+             <h5><a href="?perfil=gestao_prazos&p=frm_busca">Fazer outra busca</a></h5>
 			<div class="table-responsive list_info">
 			<?php if($x['num'] == 0){ ?>
 			
@@ -223,7 +226,7 @@ $mensagem = "Foram encontradas ".$x['num']." pedido(s) de contratação.";
 					</thead>
 					<tbody>
 <?php
-$link="index.php?perfil=gestao_eventos&p=detalhe_evento&id_eve=";
+$link="index.php?perfil=gestao_prazos&p=detalhe_evento&id_eve=";
 
 $data=date('Y');
 for($h = 0; $h < $x['num']; $h++)
@@ -258,7 +261,7 @@ for($h = 0; $h < $x['num']; $h++)
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8">
 					<div class="section-heading">
-						<h2>Busca por evento</h2>
+						<h2>Busca por pedido</h2>
 					</div>
 				</div>
 			</div>
@@ -267,7 +270,7 @@ for($h = 0; $h < $x['num']; $h++)
             <div class="form-group">
             	<div class="col-md-offset-2 col-md-8">
 					<h5><?php if(isset($mensagem)){ echo $mensagem; } ?>
-                    <form method="POST" action="?perfil=gestao_eventos&p=frm_busca" class="form-horizontal" role="form">
+                    <form method="POST" action="?perfil=gestao_prazos&p=frm_busca" class="form-horizontal" role="form">
             		<label>Id do Evento</label>
             		<input type="text" name="id" class="form-control" id="palavras" placeholder="Insira o Id do Evento" ><br />
             		
