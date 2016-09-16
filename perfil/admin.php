@@ -371,95 +371,122 @@ case "visaogeral":
 break; // FIM EVENTOS
 case "reabertura": // VISUALIZAR REABERTURA DE IGSIS
 
+if(isset($_POST['pesquisar']))
+{
+	$id = trim($_POST['id']);
+	$evento = trim($_POST['evento']);
+	$tipo = $_POST['tipo'];
+	$instituicao = $_POST['instituicao'];
 
-if(isset($_POST['apagar'])){
-	$idEvento = $_POST['apagar'];
-	$sql_reabrir = "UPDATE ig_evento SET publicado = '0' WHERE idEvento = '$idEvento'";
-	$query_reabrir = mysqli_query($con,$sql_reabrir);
-	if($query_reabrir){
-		$sql_pedido = "UPDATE igsis_pedido_contratacao SET publicado = '0' WHERE idEvento = '$idEvento'";
-		$query_pedido = mysqli_query($con,$sql_pedido);
-		if($query_pedido){
-			$evento = recuperaDados("ig_evento",$idEvento,"idEvento");
-			$mensagem = "Evento ".$evento['nomeEvento']."($idEvento) apagado com sucesso";	
-		}
-	} 
-	
-}
+	if($id == "" AND $evento == "" AND $tipo == 0 AND $instituicao == 0)
+	{ ?>
+	 <section id="services" class="home-section bg-white">
+		<div class="container">
+			  <div class="row">
+				  <div class="col-md-offset-2 col-md-8">
+					<div class="section-heading">
+					 <h2>Busca por pedido</h2>
+                    <p>É preciso ao menos um critério de busca ou você pesquisou por um pedido inexistente. Tente novamente.</p>
 
-
-
-if(isset($_POST['reabertura'])){
-	$idEvento = $_POST['reabertura'];
-	$mensagem = "";
-	$sql_reabrir = "UPDATE ig_evento SET dataEnvio = NULL WHERE idEvento = '$idEvento'";
-	$query_reabrir = mysqli_query($con,$sql_reabrir);
-	if($query_reabrir){
-		$evento = recuperaDados("ig_evento",$idEvento,"idEvento");
-		$mensagem = $mensagem."O evento ".$evento['nomeEvento']." foi reaberto.<br />";
-		$sql_pedido = "UPDATE igsis_pedido_contratacao SET estado = NULL WHERE idEvento = '$idEvento'";
-		$query_pedido = mysqli_query($con,$sql_pedido);
-		if($query_pedido){
-			$mensagem = $mensagem."Os pedidos foram reabertos.<br />";
-			$sql_recupera_pedidos_abertos = "SELECT * FROM igsis_pedido_contratacao WHERE publicado = '1' AND idEvento = $idEvento AND estado IS NULL";
-			$query_recupera_pedidos_abertos = mysqli_query($con,$sql_recupera_pedidos_abertos);
-			$n_recupera = mysqli_num_rows($query_recupera_pedidos_abertos);
-			if($n_recupera > 0){
-				$mensagem = "O evento ".$evento['nomeEvento']."foi reaberto.";
-				$pedido = "";
-				while($x = mysqli_fetch_array($query_recupera_pedidos_abertos)){
-					$pedidos = $pedidos." ".$x['idPedidoContratacao'].","; 	
-				}
-				$conteudo_email = "
-				Olá,<br />
-				Por solicitação, o(s) pedido(s) ".trim(substr($pedidos,0,-1))." foi(foram) reaberto(s) e não aparecerá(ão) em suas listas no Módulo Contratação até que seja(m) reenviado(s).<br /><br />
-				Att,<br />
-				Equipe IGSIS<br />
-				";
-				$instituicao = 4;
-				$subject = "O evento '".$evento['nomeEvento']."' foi reaberto";
-				$email = "sistema.igsis@gmail.com";
-				$usuario = "IGSIS";
-				
+					</div>
+				  </div>
+			  </div>
+			  
+	        <div class="row">
+            <div class="form-group">
+            	<div class="col-md-offset-2 col-md-8">
+            <h5><?php if(isset($mensagem)){ echo $mensagem; } ?>
+                      <form method="POST" action="?perfil=busca_pedido" class="form-horizontal" role="form">
+            		<label>Código do Pedido</label>
+            		<input type="text" name="id" class="form-control" id="palavras" placeholder="Insira o Código do Pedido" ><br />
+            		<label>Número do Processo</label>
+            		<input type="text" name="NumeroProcesso" class="form-control" id="palavras" placeholder="Insira o número do processo com a devida pontuação"><br />
 					
-				$email_envia = enviarEmailContratos($conteudo_email, $instituicao, $subject, $email, $idEvento);
-			}
-			if($email_envia){
-				$mensagem = $mensagem."<br />Foram enviadas notificações à área de Contratos.";	
-			}	
-			
+					<label>Objeto/Evento</label>
+            		<input type="text" name="evento" class="form-control" id="palavras" placeholder="Insira o objeto" ><br />
+    
+            			          
+    	        <label>Fiscal, suplente ou usuário que cadastrou o evento</label>
+					<select class="form-control" name="fiscal" id="inputSubject" >
+					<option value="0"></option>	
+					<?php echo opcaoUsuario($_SESSION['idInstituicao'],"") ?>
+                    </select>
+                    <br />
+                     <label>Tipo de evento</label>
+                    <select class="form-control" name="tipo" id="inputSubject" >
+					<option value="0"></option>		                
+						<?php echo geraOpcao("ig_tipo_evento","","") ?>
+                    </select>	
+                    <br />
+                    <label>Instituição</label>
+                    <select class="form-control" name="instituicao" id="inputSubject" >
+                   <option value="0"></option>
+						<?php echo geraOpcao("ig_instituicao","","") ?>
+                    </select>		
+                    <br />
+                    <label>Status do pedido</label>
+                    <select class="form-control" name="estado" id="inputSubject" >
+                   <option value='0'></option>
+		<?php echo geraOpcao("sis_estado","","") ?>
+                    </select>	
+                    
+                    
+     <label>Tipo de Relação Jurídica</label>
+                    <select class="form-control" name="juridico" id="inputSubject" >
+                   <option value='0'></option>
+	<?php  geraOpcao("ig_modalidade","",""); ?>
+                    </select>	
+
+
+            	</div>
+             </div>
+				<br />             
+	            <div class="form-group">
+		            <div class="col-md-offset-2 col-md-8">
+                	<input type="hidden" name="pesquisar" value="1" />
+    		        <input type="submit" class="btn btn-theme btn-lg btn-block" value="Pesquisar">
+                    </form>
+        	    	</div>
+        	    </div>
+
+	</section>
+<?php
+	}
+	else
+	{
+		if($evento != '')
+		{
+			$filtro_evento = " AND nomeEvento LIKE '%$evento%' OR autor LIKE '%$evento%' ";
 		}
-	} 
+		else
+		{
+			$filtro_evento = "";
+		}
+		if($tipo != 0)
+		{
+			$filtro_tipo = " AND ig_tipo_evento_idTipoEvento = '$tipo' ";	
+		}
+		else
+		{
+			$filtro_tipo = "";	
+		}
+		if($instituicao != 0)
+		{
+			$filtro_instituicao = " AND idInstituicao = '$instituicao' ";	
+		}
+		else
+		{
+			$filtro_instituicao = "";	
+		}
 	
-}
-
-						if(isset($_GET['order'])){
-							switch($_GET['order']){
-						
-							case "dataEnvio":
-								$order = " ORDER BY dataEnvio DESC";
-								$mensagem .= "<br /> Ordenados pelas últimas datas de envio.<br />(Reaberturas de IGs geram novas datas de envio mas não Números de Evento.)";	
-							break;
-						
-							case "idEvento":
-								$order = " ORDER BY idEvento DESC";	
-								$mensagem .= "<br /> Ordenados pelo número de Evento";	
-					
-							
-								
-							}	
-						}else{
-							$order = " ORDER BY idEvento DESC ";	
-							$mensagem .= "<br /> Ordenados pelo últimos números de Evento";	
-
-						}
-
-
-?>
+		$sql_busca = "SELECT * FROM ig_evento WHERE publicado = '1' $filtro_evento $filtro_tipo $filtro_instituicao AND dataEnvio IS NOT NULL ORDER BY dataEnvio DESC"
+		$query_busca = mysqli_query($con,$sql_busca);
+		
+		?>
 <section id="list_items" class="home-section bg-white">
 		 <div class="form-group">
             <div class="col-md-offset-2 col-md-8">		
-			<h2>Lista de eventos</h2>
+			<h2>Busca de eventos para reabertura</h2>
 			
   	        </div>
 				</div> 
@@ -476,12 +503,12 @@ if(isset($_POST['reabertura'])){
 <?php 
 
 						$idInsituicao = $_SESSION['idInstituicao'];
-						$sql_lista = "SELECT * FROM ig_evento WHERE publicado = '1' AND dataEnvio IS NOT NULL $order";
+						$sql_lista = "SELECT * FROM ig_evento WHERE publicado = '1' AND dataEnvio IS NOT NULL";
 						$query_lista = mysqli_query($con,$sql_lista);
 						$num = mysqli_num_rows($query_lista);
 ?>
 			<h5><?php echo $num ?> eventos enviados.</h5>
-            <p><a href="?perfil=admin&p=reabertura">Ordenar pelos últimos Números de Evento</a> | <a href="?perfil=admin&p=reabertura&order=dataEnvio">Ordenar pelas últimas datas de envio</a></p>
+            
             <table class='table table-condensed'>
 					<thead>					
 					<tr class='list_menu'> 
@@ -500,8 +527,9 @@ if(isset($_POST['reabertura'])){
                         <?php 
 						
 
-						while($campo = mysqli_fetch_array($query_lista)){
-		$protocolo = recuperaDados("ig_protocolo",$campo['idEvento'],"ig_evento_idEvento");
+		while($campo = mysqli_fetch_array($query_busca))
+		{
+			$protocolo = recuperaDados("ig_protocolo",$campo['idEvento'],"ig_evento_idEvento");
 		$chamado = recuperaAlteracoesEvento($campo['idEvento']);
 		$instituicao = recuperaDados("ig_instituicao",$campo['idInstituicao'],"idInstituicao");	
 			echo "<tr>";
@@ -539,6 +567,78 @@ if(isset($_POST['reabertura'])){
 			</div>
 		</div>
 </section>
+
+<?php
+	}
+
+if(isset($_POST['apagar']))
+{
+	$idEvento = $_POST['apagar'];
+	$sql_reabrir = "UPDATE ig_evento SET publicado = '0' WHERE idEvento = '$idEvento'";
+	$query_reabrir = mysqli_query($con,$sql_reabrir);
+	if($query_reabrir)
+	{
+		$sql_pedido = "UPDATE igsis_pedido_contratacao SET publicado = '0' WHERE idEvento = '$idEvento'";
+		$query_pedido = mysqli_query($con,$sql_pedido);
+		if($query_pedido)
+		{
+			$evento = recuperaDados("ig_evento",$idEvento,"idEvento");
+			$mensagem = "Evento ".$evento['nomeEvento']."($idEvento) apagado com sucesso";	
+		}
+	}
+}
+
+
+
+if(isset($_POST['reabertura']))
+{
+	$idEvento = $_POST['reabertura'];
+	$mensagem = "";
+	$sql_reabrir = "UPDATE ig_evento SET dataEnvio = NULL WHERE idEvento = '$idEvento'";
+	$query_reabrir = mysqli_query($con,$sql_reabrir);
+	if($query_reabrir)
+	{
+		$evento = recuperaDados("ig_evento",$idEvento,"idEvento");
+		$mensagem = $mensagem."O evento ".$evento['nomeEvento']." foi reaberto.<br />";
+		$sql_pedido = "UPDATE igsis_pedido_contratacao SET estado = NULL WHERE idEvento = '$idEvento'";
+		$query_pedido = mysqli_query($con,$sql_pedido);
+		if($query_pedido)
+		{
+			$mensagem = $mensagem."Os pedidos foram reabertos.<br />";
+			$sql_recupera_pedidos_abertos = "SELECT * FROM igsis_pedido_contratacao WHERE publicado = '1' AND idEvento = $idEvento AND estado IS NULL";
+			$query_recupera_pedidos_abertos = mysqli_query($con,$sql_recupera_pedidos_abertos);
+			$n_recupera = mysqli_num_rows($query_recupera_pedidos_abertos);
+			if($n_recupera > 0)
+			{
+				$mensagem = "O evento ".$evento['nomeEvento']."foi reaberto.";
+				$pedido = "";
+				while($x = mysqli_fetch_array($query_recupera_pedidos_abertos))
+				{
+					$pedidos = $pedidos." ".$x['idPedidoContratacao'].","; 	
+				}
+				$conteudo_email = "
+				Olá,<br />
+				Por solicitação, o(s) pedido(s) ".trim(substr($pedidos,0,-1))." foi(foram) reaberto(s) e não aparecerá(ão) em suas listas no Módulo Contratação até que seja(m) reenviado(s).<br /><br />
+				Att,<br />
+				Equipe IGSIS<br />
+				";
+				$instituicao = 4;
+				$subject = "O evento '".$evento['nomeEvento']."' foi reaberto";
+				$email = "sistema.igsis@gmail.com";
+				$usuario = "IGSIS";
+				
+					
+				$email_envia = enviarEmailContratos($conteudo_email, $instituicao, $subject, $email, $idEvento);
+			}
+			if($email_envia)
+			{
+				$mensagem = $mensagem."<br />Foram enviadas notificações à área de Contratos.";	
+			}
+		}
+	} 
+	
+}
+}
 <?php 
 break;
 case "contratos":

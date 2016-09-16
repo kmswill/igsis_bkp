@@ -512,6 +512,7 @@ if(isset($_POST['cadastrar'])){
 	//$con = bancoMysqli();
 	
 		$projetoEspecial = $_POST['projetoEspecial'];	
+		$instituicao = $_POST['instituicao'];
 			if($projetoEspecial == ''){  
 			$mensagem = "<p>O campo projeto especial, está em branco e é obrigatório. Tente novamente.</a></p>"; 
 							}
@@ -522,7 +523,7 @@ if(isset($_POST['cadastrar'])){
 				
 				if ($existe == 0) // caso não esteja vazio
 				{ //inserir no banco
-					$sqlinserir= "INSERT INTO `ig_projeto_especial` (`idProjetoEspecial`,`projetoEspecial`,`publicado`) VALUES (NULL, '$projetoEspecial', 1)";
+					$sqlinserir= "INSERT INTO `ig_projeto_especial` (`idProjetoEspecial`,`projetoEspecial`, `idInstituicao`,`publicado`) VALUES (NULL, '$projetoEspecial', '$instituicao', 1)";
 					$queryinserir= mysqli_query($con,$sqlinserir);
 					if($queryinserir){
 						$mensagem= "Inserido com sucesso.";
@@ -555,7 +556,7 @@ if(isset($_POST['cadastrar'])){
 			    <div class="form-group">
 					<div class="col-md-offset-2 col-md-8">
                 		<label>Instituição:</label>
-					<select name="listaespaco" class="form-control"  >
+					<select name="instituicao" class="form-control"  >
 						<?php acessoInstituicao("ig_instituicao",""); ?>
 						</select>	
 					</div>

@@ -245,7 +245,7 @@ function espacoExistente ($idUsuario) {
 
 function projetoEspecialExistente ($idUsuario) {
 	$con = bancoMysqli();
-	$sql = "SELECT * FROM ig_projeto_especial WHERE idProjetoEspecial AND publicado = 1";
+	$sql = "SELECT projesp.projetoEspecial, projesp.idProjetoEspecial, inst.instituicao FROM ig_projeto_especial projesp INNER JOIN ig_instituicao inst ON projesp.idInstituicao = inst.idInstituicao WHERE projesp.idProjetoEspecial AND projesp.publicado = 1";
 	  $query = mysqli_query($con,$sql); 
 	  	echo " 
 		<table class='table table-condensed'>	
@@ -253,7 +253,7 @@ function projetoEspecialExistente ($idUsuario) {
 					<thead>					
 					<tr class='list_menu'> 
 							<td>Nome do projeto especial</td>
-  							
+  							<td>Instituicao</td>
 							<td width='10%'></td>
 							<td width='10%'></td>
 					 </tr>	
@@ -266,8 +266,9 @@ function projetoEspecialExistente ($idUsuario) {
 					
 		while($campo = mysqli_fetch_array($query)){
 			echo "<td class='list_description'>".$campo['projetoEspecial']."</td>";
-					echo "
-				<td class='list_description'>
+			echo "<td class='list_description'>".$campo['instituicao']."</td>";
+			echo "
+			<td class='list_description'>
 			<form method='POST' action='?perfil=administrador&p=listaprojetoespecial'>
 			<input type='hidden' name='apagar' value='".$campo['idProjetoEspecial']."' />
 			<input type ='submit' class='btn btn-theme  btn-block' value='apagar'></td></form>"	;
